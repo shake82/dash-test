@@ -1,6 +1,6 @@
 
 import { CrossfilterDashboard } from './components/CrossfilterDashboard'
-import { MantineProvider, createTheme } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 
 // const theme = createTheme({
 //   primaryColor: "blue",

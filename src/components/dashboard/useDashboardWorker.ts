@@ -14,7 +14,7 @@ const emptyProgress: WorkerLoadProgress = {
   stage: "connecting",
 };
 
-export function useDashboardWorker(dataUrl: string) {
+export function useDashboardWorker(dataUrl: string, jsonPath: string) {
   const workerRef = useRef<Worker | null>(null);
   const [status, setStatus] = useState<LoadStatus>("loading");
   const [progress, setProgress] = useState<WorkerLoadProgress>(emptyProgress);
@@ -48,13 +48,13 @@ export function useDashboardWorker(dataUrl: string) {
       }
     };
 
-    postToWorker(worker, { type: "load", url: dataUrl });
+    postToWorker(worker, { type: "load", url: dataUrl, jsonPath });
 
     return () => {
       worker.terminate();
       workerRef.current = null;
     };
-  }, [dataUrl]);
+  }, [dataUrl, jsonPath]);
 
   const send = (message: DashboardWorkerInMessage) => {
     postToWorker(workerRef.current, message);

@@ -13,8 +13,8 @@ import type {
 
 type DimensionHandle = {
   id: DimensionId;
-  dimension: Crossfilter.Dimension<DataRow, string>;
-  group: Crossfilter.Group<string, number>;
+  dimension: crossfilter.Dimension<DataRow, string>;
+  group: crossfilter.Group<DataRow, string, number>;
 };
 
 type MetricAccumulator = {
@@ -27,9 +27,9 @@ type MetricAccumulator = {
 const BAR_VISIBLE_LIMIT = 5;
 const AGGREGATE_LABEL = "Others";
 
-let cf: Crossfilter.Crossfilter<DataRow> | null = null;
+let cf: crossfilter.Crossfilter<DataRow> | null = null;
 let handles = new Map<DimensionId, DimensionHandle>();
-let metricGroup: Crossfilter.GroupAll<DataRow, MetricAccumulator> | null = null;
+let metricGroup: crossfilter.GroupAll<DataRow, MetricAccumulator> | null = null;
 let totalRows = 0;
 const activeFilters = new Map<DimensionId, Set<string>>();
 
@@ -49,7 +49,40 @@ const valueForDimension = (row: DataRow, id: DimensionId) => {
   return normalizeValue(row[id]);
 };
 
-const readDataset = async (url: string) => {
+const parseJsonPath = (jsonPath: string) => {
+  const trimmedPath = jsonPath.trim();
+
+  if (!trimmedPath || trimmedPath === "." || trimmedPath === "$") {
+    return [];
+  }
+
+  const pathWithoutRoot = trimmedPath
+    .replace(/^\$\./, "")
+    .replace(/^\./, "")
+    .replace(/\[(\d+)\]/g, ".$1");
+
+  return pathWithoutRoot.split(".").filter(Boolean);
+};
+
+const resolveJsonPath = (value: unknown, jsonPath: string) => {
+  return parseJsonPath(jsonPath).reduce<unknown>((current, segment) => {
+    if (current === null || current === undefined) {
+      return undefined;
+    }
+
+    if (Array.isArray(current)) {
+      return current[Number(segment)];
+    }
+
+    if (typeof current === "object") {
+      return (current as Record<string, unknown>)[segment];
+    }
+
+    return undefined;
+  }, value);
+};
+
+const readDataset = async (url: string, jsonPath: string) => {
   send({
     type: "progress",
     payload: {
@@ -70,8 +103,14 @@ const readDataset = async (url: string) => {
   const totalBytes = totalHeader ? Number(totalHeader) : null;
 
   if (!response.body) {
-    const rows = (await response.json()) as DataRow[];
-    return rows;
+    const json = await response.json();
+    const rows = resolveJsonPath(json, jsonPath);
+
+    if (!Array.isArray(rows)) {
+      throw new Error(`Expected an array at JSON path "${jsonPath}".`);
+    }
+
+    return rows as DataRow[];
   }
 
   const reader = response.body.getReader();
@@ -119,7 +158,14 @@ const readDataset = async (url: string) => {
     offset += chunk.byteLength;
   }
 
-  return JSON.parse(new TextDecoder().decode(merged)) as DataRow[];
+  const json = JSON.parse(new TextDecoder().decode(merged));
+  const rows = resolveJsonPath(json, jsonPath);
+
+  if (!Array.isArray(rows)) {
+    throw new Error(`Expected an array at JSON path "${jsonPath}".`);
+  }
+
+  return rows as DataRow[];
 };
 
 const initializeCrossfilter = (rows: DataRow[]) => {
@@ -130,11 +176,11 @@ const initializeCrossfilter = (rows: DataRow[]) => {
 
   for (const config of DIMENSIONS) {
     const dimension = cf.dimension((row) => valueForDimension(row, config.id));
-    const group = dimension.group().reduceCount();
+    const group = dimension.group<string, number>().reduceCount();
     handles.set(config.id, { id: config.id, dimension, group });
   }
 
-  metricGroup = cf.groupAll().reduce<MetricAccumulator>(
+  metricGroup = cf.groupAll<MetricAccumulator>().reduce(
     (state, row) => ({
       count: state.count + 1,
       revenue: state.revenue + row.revenue,
@@ -332,7 +378,7 @@ self.onmessage = async (event: MessageEvent<DashboardWorkerInMessage>) => {
     const message = event.data;
 
     if (message.type === "load") {
-      const rows = await readDataset(message.url);
+      const rows = await readDataset(message.url, message.jsonPath);
 
       send({
         type: "progress",

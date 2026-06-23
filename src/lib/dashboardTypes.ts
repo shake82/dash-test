@@ -79,7 +79,7 @@ export type DashboardWorkerOutMessage =
   | { type: "error"; payload: { message: string } };
 
 export type DashboardWorkerInMessage =
-  | { type: "load"; url: string }
+  | { type: "load"; url: string; jsonPath: string }
   | { type: "toggleFilter"; dimensionId: DimensionId; value: string }
   | { type: "clearFilter"; dimensionId: DimensionId }
   | { type: "clearAllFilters" };

@@ -14,10 +14,14 @@ import type { DimensionId } from "@/lib/dashboardTypes";
 
 type Props = {
   dataUrl: string;
+  jsonPath?: string;
 };
 
-export function CrossfilterDashboard({ dataUrl }: Props) {
-  const { dashboardState, error, progress, send, status } = useDashboardWorker(dataUrl);
+export function CrossfilterDashboard({ dataUrl, jsonPath = "." }: Props) {
+  const { dashboardState, error, progress, send, status } = useDashboardWorker(
+    dataUrl,
+    jsonPath,
+  );
   const [expandedDimensionId, setExpandedDimensionId] = useState<DimensionId | null>(null);
 
   useEffect(() => {
