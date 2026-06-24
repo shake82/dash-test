@@ -2,13 +2,13 @@ import crossfilter from "crossfilter2";
 import type {
   ActiveFilters,
   ChartDatum,
-  DashboardConfig,
   DashboardMetrics,
   DashboardWorkerInMessage,
   DashboardWorkerOutMessage,
   DataRow,
   DimensionId,
   DimensionSummary,
+  SerializableDashboardConfig,
 } from "@/lib/dashboardTypes";
 
 type DimensionHandle = {
@@ -28,7 +28,7 @@ let cf: crossfilter.Crossfilter<DataRow> | null = null;
 let handles = new Map<DimensionId, DimensionHandle>();
 let metricGroup: crossfilter.GroupAll<DataRow, MetricAccumulator> | null = null;
 let totalRows = 0;
-let currentConfig: DashboardConfig = { dimensions: [], metrics: [] };
+let currentConfig: SerializableDashboardConfig = { dimensions: [], metrics: [] };
 const activeFilters = new Map<DimensionId, Set<string>>();
 
 const send = (message: DashboardWorkerOutMessage) => {
@@ -43,8 +43,18 @@ const normalizeValue = (value: unknown) => {
   return String(value);
 };
 
-const valueForDimension = (row: DataRow, config: DashboardConfig["dimensions"][number]) => {
+const valueForDimension = (
+  row: DataRow,
+  config: SerializableDashboardConfig["dimensions"][number],
+) => {
   return normalizeValue(row[config.field ?? config.id]);
+};
+
+const labelForDimensionValue = (
+  value: string,
+  config: SerializableDashboardConfig["dimensions"][number],
+) => {
+  return config.lookup?.[value] ?? value;
 };
 
 const numberForMetric = (row: DataRow, field?: string) => {
@@ -205,7 +215,7 @@ const updateMetricAccumulator = (
   };
 };
 
-const initializeCrossfilter = (rows: DataRow[], config: DashboardConfig) => {
+const initializeCrossfilter = (rows: DataRow[], config: SerializableDashboardConfig) => {
   activeFilters.clear();
   handles = new Map();
   totalRows = rows.length;
@@ -286,8 +296,10 @@ const toChartDatum = (
   item: { key: string; value: number },
   totalCount: number,
   selected: Set<string>,
+  config: SerializableDashboardConfig["dimensions"][number],
 ): ChartDatum => ({
   key: item.key,
+  label: labelForDimensionValue(item.key, config),
   value: item.value,
   share: totalCount ? item.value / totalCount : 0,
   selected: selected.has(item.key),
@@ -312,6 +324,7 @@ const getVisibleValues = (
     ...topValues,
     {
       key: AGGREGATE_LABEL,
+      label: AGGREGATE_LABEL,
       value: aggregateValue,
       share: totalCount ? aggregateValue / totalCount : 0,
       selected: aggregateSelected,
@@ -343,16 +356,19 @@ const getSummaries = (): DimensionSummary[] => {
     const groupedValues = handle.group
       .all()
       .filter((item) => item.value > 0)
-      .map((item) => ({ key: String(item.key), value: item.value }))
+      .map((item) => {
+        const key = String(item.key);
+        return { key, label: labelForDimensionValue(key, config), value: item.value };
+      })
       .sort((a, b) => {
         const byValue = b.value - a.value;
-        return byValue || a.key.localeCompare(b.key);
+        return byValue || a.label.localeCompare(b.label) || a.key.localeCompare(b.key);
       });
 
     const chartType = groupedValues.length <= config.pieThreshold ? "pie" : "bar";
     const totalCount = groupedValues.reduce((sum, item) => sum + item.value, 0);
     const allValues = groupedValues.map((item) =>
-      toChartDatum(item, totalCount, selected),
+      toChartDatum(item, totalCount, selected, config),
     );
     const values = getVisibleValues(allValues, chartType, totalCount, visibleLimit);
     const hiddenCount =

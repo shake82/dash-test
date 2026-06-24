@@ -29,7 +29,7 @@ export function PieDimension({ summary, onShowAll, onToggle }: DimensionChartPro
         <Pie
           data={summary.values}
           dataKey="value"
-          nameKey="key"
+          nameKey="label"
           innerRadius="52%"
           outerRadius="82%"
           paddingAngle={2}
@@ -69,7 +69,7 @@ export function BarDimension({ summary, onShowAll, onToggle }: DimensionChartPro
         <XAxis type="number" hide />
         <YAxis
           type="category"
-          dataKey="key"
+          dataKey="label"
           width={120}
           tickLine={false}
           axisLine={false}

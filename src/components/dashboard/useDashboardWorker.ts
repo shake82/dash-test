@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import type {
+  ChartDatum,
   DashboardConfig,
   DashboardWorkerInMessage,
   DashboardWorkerOutMessage,
+  DimensionConfig,
+  DimensionSummary,
+  SerializableDashboardConfig,
   WorkerLoadProgress,
   WorkerStatePayload,
 } from "@/lib/dashboardTypes";
@@ -14,6 +18,8 @@ const emptyProgress: WorkerLoadProgress = {
   percent: null,
   stage: "connecting",
 };
+
+const AGGREGATE_LABEL = "Others";
 
 export function useDashboardWorker(
   dataUrl: string,
@@ -42,7 +48,7 @@ export function useDashboardWorker(
       }
 
       if (message.type === "ready" || message.type === "state") {
-        setDashboardState(message.payload);
+        setDashboardState(applyLookupLabels(message.payload, config));
         setStatus("ready");
         return;
       }
@@ -53,7 +59,12 @@ export function useDashboardWorker(
       }
     };
 
-    postToWorker(worker, { type: "load", url: dataUrl, jsonPath, config });
+    postToWorker(worker, {
+      type: "load",
+      url: dataUrl,
+      jsonPath,
+      config: getSerializableConfig(config),
+    });
 
     return () => {
       worker.terminate();
@@ -70,4 +81,110 @@ export function useDashboardWorker(
 
 function postToWorker(worker: Worker | null, message: DashboardWorkerInMessage) {
   worker?.postMessage(message);
+}
+
+function getSerializableConfig(config: DashboardConfig): SerializableDashboardConfig {
+  return {
+    metrics: config.metrics,
+    dimensions: config.dimensions.map(({ lookup, ...dimension }) => {
+      if (!lookup || typeof lookup === "function") {
+        return dimension;
+      }
+
+      return { ...dimension, lookup };
+    }),
+  };
+}
+
+function applyLookupLabels(
+  payload: WorkerStatePayload,
+  config: DashboardConfig,
+): WorkerStatePayload {
+  const dimensionsById = new Map(config.dimensions.map((dimension) => [dimension.id, dimension]));
+
+  return {
+    ...payload,
+    dimensions: payload.dimensions.map((summary) => {
+      const dimensionConfig = dimensionsById.get(summary.id) ?? summary;
+      return applySummaryLookupLabels(summary, dimensionConfig);
+    }),
+  };
+}
+
+function applySummaryLookupLabels(
+  summary: DimensionSummary,
+  dimensionConfig: DimensionConfig,
+): DimensionSummary {
+  const allValues = summary.allValues
+    .map((datum) => applyDatumLookupLabel(datum, dimensionConfig))
+    .sort((a, b) => {
+      const byValue = b.value - a.value;
+      return byValue || a.label.localeCompare(b.label) || a.key.localeCompare(b.key);
+    });
+  const visibleLimit = Math.max(1, dimensionConfig.maxVisibleItems);
+  const values = getVisibleValues(allValues, summary.chartType, summary.totalCount, visibleLimit);
+
+  return {
+    ...summary,
+    lookup: dimensionConfig.lookup,
+    values,
+    allValues,
+  };
+}
+
+function applyDatumLookupLabel(
+  datum: ChartDatum,
+  dimensionConfig: DimensionConfig,
+): ChartDatum {
+  if (datum.isAggregate) {
+    return { ...datum, label: datum.label || datum.key };
+  }
+
+  return {
+    ...datum,
+    label: getLookupLabel(datum.key, dimensionConfig),
+  };
+}
+
+function getLookupLabel(value: string, dimensionConfig: DimensionConfig) {
+  const { lookup } = dimensionConfig;
+
+  if (!lookup) {
+    return value;
+  }
+
+  if (typeof lookup === "function") {
+    return lookup(value) ?? value;
+  }
+
+  return lookup[value] ?? value;
+}
+
+function getVisibleValues(
+  allValues: ChartDatum[],
+  chartType: DimensionSummary["chartType"],
+  totalCount: number,
+  visibleLimit: number,
+) {
+  if (chartType !== "bar" || allValues.length <= visibleLimit) {
+    return allValues;
+  }
+
+  const topValues = allValues.slice(0, visibleLimit);
+  const aggregatedValues = allValues.slice(visibleLimit);
+  const aggregateValue = aggregatedValues.reduce((sum, item) => sum + item.value, 0);
+  const aggregateSelected = aggregatedValues.some((item) => item.selected);
+
+  return [
+    ...topValues,
+    {
+      key: AGGREGATE_LABEL,
+      label: AGGREGATE_LABEL,
+      value: aggregateValue,
+      share: totalCount ? aggregateValue / totalCount : 0,
+      selected: aggregateSelected,
+      isAggregate: true,
+      aggregateCount: aggregatedValues.length,
+    },
+  ];
 }

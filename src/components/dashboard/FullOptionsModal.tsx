@@ -54,7 +54,7 @@ export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModa
             <XAxis type="number" hide />
             <YAxis
               type="category"
-              dataKey="key"
+              dataKey="label"
               width={170}
               tickLine={false}
               axisLine={false}

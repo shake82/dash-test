@@ -17,7 +17,7 @@ export function ChartTooltip({ active, payload }: ChartTooltipProps) {
   return (
     <Paper withBorder shadow="md" px="sm" py={6} radius="md" bg="white">
       <Text size="sm" fw={600} c="ink.9">
-        {datum.key}
+        {datum.label}
       </Text>
       <Text size="sm" c="dimmed">
         {wholeNumber.format(datum.value)} rows, {percent.format(datum.share)}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Box, SimpleGrid, Stack } from "@mantine/core";
 import { ActiveFiltersBar } from "@/components/dashboard/ActiveFiltersBar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
@@ -53,6 +53,27 @@ export function CrossfilterDashboard({
     return new Map(config.dimensions.map((item) => [item.id, item.label]));
   }, [config]);
 
+  const dimensionLookups = useMemo(() => {
+    return new Map(config.dimensions.map((item) => [item.id, item.lookup]));
+  }, [config]);
+
+  const getValueLabel = useCallback(
+    (dimensionId: DimensionId, value: string) => {
+      const lookup = dimensionLookups.get(dimensionId);
+
+      if (!lookup) {
+        return value;
+      }
+
+      if (typeof lookup === "function") {
+        return lookup(value) ?? value;
+      }
+
+      return lookup[value] ?? value;
+    },
+    [dimensionLookups],
+  );
+
   const expandedSummary = useMemo(() => {
     return dashboardState?.dimensions.find((item) => item.id === expandedDimensionId) ?? null;
   }, [dashboardState?.dimensions, expandedDimensionId]);
@@ -79,6 +100,7 @@ export function CrossfilterDashboard({
             <ActiveFiltersBar
               dimensionLabels={dimensionLabels}
               entries={filterEntries}
+              getValueLabel={getValueLabel}
               onClearFilter={(dimensionId) => send({ type: "clearFilter", dimensionId })}
               onRemoveValue={(dimensionId, value) =>
                 send({ type: "toggleFilter", dimensionId, value })

@@ -4,10 +4,15 @@ export type DimensionId = string;
 
 export type MetricId = string;
 
+export type DimensionLookup =
+  | Record<string, string>
+  | ((value: string) => string | null | undefined);
+
 export type DimensionConfig = {
   id: DimensionId;
   label: string;
   field?: string;
+  lookup?: DimensionLookup;
   maxVisibleItems: number;
   pieThreshold: number;
 };
@@ -28,8 +33,18 @@ export type DashboardConfig = {
   metrics: MetricConfig[];
 };
 
+export type SerializableDimensionConfig = Omit<DimensionConfig, "lookup"> & {
+  lookup?: Record<string, string>;
+};
+
+export type SerializableDashboardConfig = {
+  dimensions: SerializableDimensionConfig[];
+  metrics: MetricConfig[];
+};
+
 export type ChartDatum = {
   key: string;
+  label: string;
   value: number;
   share: number;
   selected: boolean;
@@ -79,7 +94,7 @@ export type DashboardWorkerOutMessage =
   | { type: "error"; payload: { message: string } };
 
 export type DashboardWorkerInMessage =
-  | { type: "load"; url: string; jsonPath: string; config: DashboardConfig }
+  | { type: "load"; url: string; jsonPath: string; config: SerializableDashboardConfig }
   | { type: "toggleFilter"; dimensionId: DimensionId; value: string }
   | { type: "clearFilter"; dimensionId: DimensionId }
   | { type: "clearAllFilters" };
