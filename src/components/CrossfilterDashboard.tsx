@@ -10,17 +10,24 @@ import { FullOptionsModal } from "@/components/dashboard/FullOptionsModal";
 import { MetricStrip } from "@/components/dashboard/MetricStrip";
 import { selectedCount } from "@/components/dashboard/formatters";
 import { useDashboardWorker } from "@/components/dashboard/useDashboardWorker";
-import type { DimensionId } from "@/lib/dashboardTypes";
+import { DEFAULT_DASHBOARD_CONFIG } from "@/lib/dashboardConfig";
+import type { DashboardConfig, DimensionId } from "@/lib/dashboardTypes";
 
 type Props = {
   dataUrl: string;
+  config?: DashboardConfig;
   jsonPath?: string;
 };
 
-export function CrossfilterDashboard({ dataUrl, jsonPath = "." }: Props) {
+export function CrossfilterDashboard({
+  config = DEFAULT_DASHBOARD_CONFIG,
+  dataUrl,
+  jsonPath = ".",
+}: Props) {
   const { dashboardState, error, progress, send, status } = useDashboardWorker(
     dataUrl,
     jsonPath,
+    config,
   );
   const [expandedDimensionId, setExpandedDimensionId] = useState<DimensionId | null>(null);
 
@@ -41,6 +48,10 @@ export function CrossfilterDashboard({ dataUrl, jsonPath = "." }: Props) {
     const active = dashboardState?.activeFilters ?? {};
     return Object.entries(active) as Array<[DimensionId, string[]]>;
   }, [dashboardState?.activeFilters]);
+
+  const dimensionLabels = useMemo(() => {
+    return new Map(config.dimensions.map((item) => [item.id, item.label]));
+  }, [config]);
 
   const expandedSummary = useMemo(() => {
     return dashboardState?.dimensions.find((item) => item.id === expandedDimensionId) ?? null;
@@ -66,6 +77,7 @@ export function CrossfilterDashboard({ dataUrl, jsonPath = "." }: Props) {
           <>
             <MetricStrip state={dashboardState} />
             <ActiveFiltersBar
+              dimensionLabels={dimensionLabels}
               entries={filterEntries}
               onClearFilter={(dimensionId) => send({ type: "clearFilter", dimensionId })}
               onRemoveValue={(dimensionId, value) =>

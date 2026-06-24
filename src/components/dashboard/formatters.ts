@@ -1,4 +1,3 @@
-import { DIMENSIONS } from "@/lib/dashboardConfig";
 import type { ActiveFilters, WorkerLoadProgress } from "@/lib/dashboardTypes";
 
 export type LoadStatus = "loading" | "ready" | "error";
@@ -21,8 +20,6 @@ export const percent = new Intl.NumberFormat("en-US", {
   style: "percent",
   maximumFractionDigits: 1,
 });
-
-export const dimensionLabels = new Map(DIMENSIONS.map((item) => [item.id, item.label]));
 
 export function selectedCount(filters: ActiveFilters) {
   return Object.values(filters).reduce(

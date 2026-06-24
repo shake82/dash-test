@@ -1,5 +1,6 @@
 
 import { CrossfilterDashboard } from './components/CrossfilterDashboard'
+import { DEFAULT_DASHBOARD_CONFIG } from './lib/dashboardConfig'
 import { MantineProvider } from "@mantine/core";
 
 // const theme = createTheme({
@@ -30,7 +31,10 @@ function App() {
   return (<MantineProvider 
   // theme={theme} 
   defaultColorScheme="light">
-    <CrossfilterDashboard dataUrl="/api/dashboard-data.json" />
+    <CrossfilterDashboard
+      config={DEFAULT_DASHBOARD_CONFIG}
+      dataUrl="/api/dashboard-data.json"
+    />
   </MantineProvider>);
 }
 

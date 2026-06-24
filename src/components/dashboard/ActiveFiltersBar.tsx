@@ -1,15 +1,16 @@
 import { ActionIcon, Button, Group, Paper, Text } from "@mantine/core";
 import { FilterX, X } from "lucide-react";
 import type { DimensionId } from "@/lib/dashboardTypes";
-import { dimensionLabels } from "./formatters";
 
 type ActiveFiltersBarProps = {
   entries: Array<[DimensionId, string[]]>;
+  dimensionLabels: Map<DimensionId, string>;
   onClearFilter: (dimensionId: DimensionId) => void;
   onRemoveValue: (dimensionId: DimensionId, value: string) => void;
 };
 
 export function ActiveFiltersBar({
+  dimensionLabels,
   entries,
   onClearFilter,
   onRemoveValue,
@@ -46,7 +47,7 @@ export function ActiveFiltersBar({
           >
             <Group gap={6}>
               <Text size="xs" fw={700} tt="uppercase" c="dimmed">
-                {dimensionLabels.get(dimensionId)}
+                {dimensionLabels.get(dimensionId) ?? dimensionId}
               </Text>
               {values.map((value) => (
                 <Button
@@ -73,7 +74,7 @@ export function ActiveFiltersBar({
                 color="gray"
                 size="sm"
                 onClick={() => onClearFilter(dimensionId)}
-                title={`Clear ${dimensionLabels.get(dimensionId)}`}
+                title={`Clear ${dimensionLabels.get(dimensionId) ?? dimensionId}`}
               >
                 <FilterX size={15} aria-hidden="true" />
               </ActionIcon>

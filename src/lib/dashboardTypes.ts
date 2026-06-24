@@ -1,33 +1,31 @@
-export type DataRow = {
-  id: string;
-  region: string;
-  category: string;
-  product: string;
-  channel: string;
-  segment: string;
-  status: string;
-  quarter: string;
-  owner: string;
-  revenue: number;
-  units: number;
-  satisfaction: number;
-};
+export type DataRow = Record<string, unknown>;
 
-export type DimensionId =
-  | "region"
-  | "category"
-  | "product"
-  | "channel"
-  | "segment"
-  | "status"
-  | "quarter"
-  | "owner";
+export type DimensionId = string;
+
+export type MetricId = string;
 
 export type DimensionConfig = {
   id: DimensionId;
   label: string;
+  field?: string;
   maxVisibleItems: number;
   pieThreshold: number;
+};
+
+export type MetricFormat = "compact" | "currency" | "decimal" | "number" | "percent";
+
+export type MetricConfig = {
+  id: MetricId;
+  label: string;
+  kind: "average" | "count" | "sum";
+  field?: string;
+  detail?: string;
+  format?: MetricFormat;
+};
+
+export type DashboardConfig = {
+  dimensions: DimensionConfig[];
+  metrics: MetricConfig[];
 };
 
 export type ChartDatum = {
@@ -51,12 +49,14 @@ export type DimensionSummary = DimensionConfig & {
 
 export type ActiveFilters = Partial<Record<DimensionId, string[]>>;
 
+export type DashboardMetricValue = MetricConfig & {
+  value: number;
+};
+
 export type DashboardMetrics = {
   totalRows: number;
   filteredRows: number;
-  revenue: number;
-  units: number;
-  averageSatisfaction: number;
+  values: DashboardMetricValue[];
 };
 
 export type WorkerLoadProgress = {
@@ -79,7 +79,7 @@ export type DashboardWorkerOutMessage =
   | { type: "error"; payload: { message: string } };
 
 export type DashboardWorkerInMessage =
-  | { type: "load"; url: string; jsonPath: string }
+  | { type: "load"; url: string; jsonPath: string; config: DashboardConfig }
   | { type: "toggleFilter"; dimensionId: DimensionId; value: string }
   | { type: "clearFilter"; dimensionId: DimensionId }
   | { type: "clearAllFilters" };

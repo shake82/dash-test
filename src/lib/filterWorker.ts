@@ -1,8 +1,8 @@
 import crossfilter from "crossfilter2";
-import { DIMENSIONS } from "@/lib/dashboardConfig";
 import type {
   ActiveFilters,
   ChartDatum,
+  DashboardConfig,
   DashboardMetrics,
   DashboardWorkerInMessage,
   DashboardWorkerOutMessage,
@@ -19,18 +19,16 @@ type DimensionHandle = {
 
 type MetricAccumulator = {
   count: number;
-  revenue: number;
-  units: number;
-  satisfaction: number;
+  sums: Record<string, number>;
 };
 
-const BAR_VISIBLE_LIMIT = 5;
 const AGGREGATE_LABEL = "Others";
 
 let cf: crossfilter.Crossfilter<DataRow> | null = null;
 let handles = new Map<DimensionId, DimensionHandle>();
 let metricGroup: crossfilter.GroupAll<DataRow, MetricAccumulator> | null = null;
 let totalRows = 0;
+let currentConfig: DashboardConfig = { dimensions: [], metrics: [] };
 const activeFilters = new Map<DimensionId, Set<string>>();
 
 const send = (message: DashboardWorkerOutMessage) => {
@@ -45,8 +43,17 @@ const normalizeValue = (value: unknown) => {
   return String(value);
 };
 
-const valueForDimension = (row: DataRow, id: DimensionId) => {
-  return normalizeValue(row[id]);
+const valueForDimension = (row: DataRow, config: DashboardConfig["dimensions"][number]) => {
+  return normalizeValue(row[config.field ?? config.id]);
+};
+
+const numberForMetric = (row: DataRow, field?: string) => {
+  if (!field) {
+    return 0;
+  }
+
+  const value = Number(row[field]);
+  return Number.isFinite(value) ? value : 0;
 };
 
 const parseJsonPath = (jsonPath: string) => {
@@ -168,32 +175,53 @@ const readDataset = async (url: string, jsonPath: string) => {
   return rows as DataRow[];
 };
 
-const initializeCrossfilter = (rows: DataRow[]) => {
+const createMetricAccumulator = (): MetricAccumulator => ({
+  count: 0,
+  sums: Object.fromEntries(
+    currentConfig.metrics
+      .filter((metric) => metric.kind !== "count")
+      .map((metric) => [metric.id, 0]),
+  ),
+});
+
+const updateMetricAccumulator = (
+  state: MetricAccumulator,
+  row: DataRow,
+  direction: 1 | -1,
+): MetricAccumulator => {
+  const sums = { ...state.sums };
+
+  for (const metric of currentConfig.metrics) {
+    if (metric.kind === "count") {
+      continue;
+    }
+
+    sums[metric.id] = (sums[metric.id] ?? 0) + numberForMetric(row, metric.field) * direction;
+  }
+
+  return {
+    count: state.count + direction,
+    sums,
+  };
+};
+
+const initializeCrossfilter = (rows: DataRow[], config: DashboardConfig) => {
   activeFilters.clear();
   handles = new Map();
   totalRows = rows.length;
+  currentConfig = config;
   cf = crossfilter(rows);
 
-  for (const config of DIMENSIONS) {
-    const dimension = cf.dimension((row) => valueForDimension(row, config.id));
+  for (const config of currentConfig.dimensions) {
+    const dimension = cf.dimension((row) => valueForDimension(row, config));
     const group = dimension.group<string, number>().reduceCount();
     handles.set(config.id, { id: config.id, dimension, group });
   }
 
   metricGroup = cf.groupAll<MetricAccumulator>().reduce(
-    (state, row) => ({
-      count: state.count + 1,
-      revenue: state.revenue + row.revenue,
-      units: state.units + row.units,
-      satisfaction: state.satisfaction + row.satisfaction,
-    }),
-    (state, row) => ({
-      count: state.count - 1,
-      revenue: state.revenue - row.revenue,
-      units: state.units - row.units,
-      satisfaction: state.satisfaction - row.satisfaction,
-    }),
-    () => ({ count: 0, revenue: 0, units: 0, satisfaction: 0 }),
+    (state, row) => updateMetricAccumulator(state, row, 1),
+    (state, row) => updateMetricAccumulator(state, row, -1),
+    createMetricAccumulator,
   );
 };
 
@@ -230,17 +258,27 @@ const serializeFilters = () => {
 const getMetrics = (): DashboardMetrics => {
   const value = metricGroup?.value() ?? {
     count: 0,
-    revenue: 0,
-    units: 0,
-    satisfaction: 0,
+    sums: {},
   };
 
   return {
     totalRows,
     filteredRows: value.count,
-    revenue: value.revenue,
-    units: value.units,
-    averageSatisfaction: value.count ? value.satisfaction / value.count : 0,
+    values: currentConfig.metrics.map((metric) => {
+      const metricValue =
+        metric.kind === "count"
+          ? value.count
+          : metric.kind === "average"
+            ? value.count
+              ? (value.sums[metric.id] ?? 0) / value.count
+              : 0
+            : value.sums[metric.id] ?? 0;
+
+      return {
+        ...metric,
+        value: metricValue,
+      };
+    }),
   };
 };
 
@@ -259,13 +297,14 @@ const getVisibleValues = (
   allValues: ChartDatum[],
   chartType: "bar" | "pie",
   totalCount: number,
+  visibleLimit: number,
 ) => {
-  if (chartType !== "bar" || allValues.length <= BAR_VISIBLE_LIMIT) {
+  if (chartType !== "bar" || allValues.length <= visibleLimit) {
     return allValues;
   }
 
-  const topValues = allValues.slice(0, BAR_VISIBLE_LIMIT);
-  const aggregatedValues = allValues.slice(BAR_VISIBLE_LIMIT);
+  const topValues = allValues.slice(0, visibleLimit);
+  const aggregatedValues = allValues.slice(visibleLimit);
   const aggregateValue = aggregatedValues.reduce((sum, item) => sum + item.value, 0);
   const aggregateSelected = aggregatedValues.some((item) => item.selected);
 
@@ -283,9 +322,10 @@ const getVisibleValues = (
 };
 
 const getSummaries = (): DimensionSummary[] => {
-  return DIMENSIONS.map((config) => {
+  return currentConfig.dimensions.map((config) => {
     const handle = handles.get(config.id);
     const selected = activeFilters.get(config.id) ?? new Set<string>();
+    const visibleLimit = Math.max(1, config.maxVisibleItems);
 
     if (!handle) {
       return {
@@ -314,9 +354,9 @@ const getSummaries = (): DimensionSummary[] => {
     const allValues = groupedValues.map((item) =>
       toChartDatum(item, totalCount, selected),
     );
-    const values = getVisibleValues(allValues, chartType, totalCount);
+    const values = getVisibleValues(allValues, chartType, totalCount, visibleLimit);
     const hiddenCount =
-      chartType === "bar" ? Math.max(0, allValues.length - BAR_VISIBLE_LIMIT) : 0;
+      chartType === "bar" ? Math.max(0, allValues.length - visibleLimit) : 0;
 
     return {
       ...config,
@@ -390,7 +430,7 @@ self.onmessage = async (event: MessageEvent<DashboardWorkerInMessage>) => {
         },
       });
 
-      initializeCrossfilter(rows);
+      initializeCrossfilter(rows, message.config);
 
       send({
         type: "progress",

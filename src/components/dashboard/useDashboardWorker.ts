@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type {
+  DashboardConfig,
   DashboardWorkerInMessage,
   DashboardWorkerOutMessage,
   WorkerLoadProgress,
@@ -14,7 +15,11 @@ const emptyProgress: WorkerLoadProgress = {
   stage: "connecting",
 };
 
-export function useDashboardWorker(dataUrl: string, jsonPath: string) {
+export function useDashboardWorker(
+  dataUrl: string,
+  jsonPath: string,
+  config: DashboardConfig,
+) {
   const workerRef = useRef<Worker | null>(null);
   const [status, setStatus] = useState<LoadStatus>("loading");
   const [progress, setProgress] = useState<WorkerLoadProgress>(emptyProgress);
@@ -48,13 +53,13 @@ export function useDashboardWorker(dataUrl: string, jsonPath: string) {
       }
     };
 
-    postToWorker(worker, { type: "load", url: dataUrl, jsonPath });
+    postToWorker(worker, { type: "load", url: dataUrl, jsonPath, config });
 
     return () => {
       worker.terminate();
       workerRef.current = null;
     };
-  }, [dataUrl, jsonPath]);
+  }, [config, dataUrl, jsonPath]);
 
   const send = (message: DashboardWorkerInMessage) => {
     postToWorker(workerRef.current, message);
