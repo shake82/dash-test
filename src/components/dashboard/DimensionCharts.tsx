@@ -121,6 +121,21 @@ export function PieDimension({ summary, onShowAll, onToggle }: DimensionChartPro
 }
 
 export function BarDimension({ summary, onShowAll, onToggle }: DimensionChartProps) {
+  const handleBarClick = (entry: unknown) => {
+    const datum = getBarDatum(entry);
+
+    if (!datum) {
+      return;
+    }
+
+    if (datum.isAggregate) {
+      onShowAll();
+      return;
+    }
+
+    onToggle(summary.id, datum.key);
+  };
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
@@ -146,21 +161,9 @@ export function BarDimension({ summary, onShowAll, onToggle }: DimensionChartPro
         <Bar
           dataKey="value"
           radius={[0, 5, 5, 0]}
+          background={{ fill: "#fff", fillOpacity: 0, pointerEvents: "all" }}
           isAnimationActive={false}
-          onClick={(entry) => {
-            const datum = getBarDatum(entry);
-
-            if (!datum) {
-              return;
-            }
-
-            if (datum.isAggregate) {
-              onShowAll();
-              return;
-            }
-
-            onToggle(summary.id, datum.key);
-          }}
+          onClick={handleBarClick}
         >
           {summary.values.map((entry, index) => (
             <Cell

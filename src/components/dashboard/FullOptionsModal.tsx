@@ -58,6 +58,14 @@ export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModa
       : Math.max(340, Math.min(960, filteredValues.length * 34));
   const hasActiveSelection = hasSelection(summary.allValues);
 
+  const handleBarClick = (entry: unknown) => {
+    const datum = getBarDatum(entry);
+
+    if (datum) {
+      onToggle(summary.id, datum.key);
+    }
+  };
+
   return (
     <Modal
       opened
@@ -147,14 +155,9 @@ export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModa
                   dataKey="value"
                   radius={[0, 5, 5, 0]}
                   maxBarSize={25}
+                  background={{ fill: "#fff", fillOpacity: 0, pointerEvents: "all" }}
                   isAnimationActive={false}
-                  onClick={(entry) => {
-                    const datum = getBarDatum(entry);
-
-                    if (datum) {
-                      onToggle(summary.id, datum.key);
-                    }
-                  }}
+                  onClick={handleBarClick}
                 >
                   {filteredValues.map((entry, index) => (
                     <Cell
