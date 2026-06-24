@@ -71,6 +71,7 @@ export function BarDimension({ summary, onShowAll, onToggle }: DimensionChartPro
           type="category"
           dataKey="label"
           width={120}
+          interval={0}
           tickLine={false}
           axisLine={false}
           tick={{ fill: "#525252", fontSize: 12 }}
