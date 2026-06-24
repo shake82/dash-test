@@ -10,6 +10,8 @@ type ActiveFiltersBarProps = {
   onRemoveValue: (dimensionId: DimensionId, value: string) => void;
 };
 
+const activeFiltersBarMinHeight = 62;
+
 export function ActiveFiltersBar({
   dimensionLabels,
   entries,
@@ -24,10 +26,11 @@ export function ActiveFiltersBar({
         withBorder
         p="sm"
         radius="md"
+        mih={activeFiltersBarMinHeight}
         bg="white"
         style={{ borderStyle: "dashed" }}
       >
-        <Group gap="xs" c="dimmed" mih={28}>
+        <Group gap="xs" c="dimmed" mih={34} align="center">
           <FilterX size={16} aria-hidden="true" />
           <Text size="sm">No active filters</Text>
         </Group>
@@ -36,8 +39,16 @@ export function ActiveFiltersBar({
   }
 
   return (
-    <Paper component="section" withBorder shadow="xs" p="sm" radius="md" bg="white">
-      <Group gap="xs">
+    <Paper
+      component="section"
+      withBorder
+      shadow="xs"
+      p="sm"
+      radius="md"
+      mih={activeFiltersBarMinHeight}
+      bg="white"
+    >
+      <Group gap="xs" align="center">
         {entries.map(([dimensionId, values]) => (
           <Paper
             key={dimensionId}

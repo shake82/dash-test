@@ -14,7 +14,7 @@ export function getBarFill(entry: ChartDatum, index: number) {
     return "#737373";
   }
 
-  return CHART_COLORS[index % CHART_COLORS.length];
+  return CHART_COLORS[(entry.colorIndex ?? index) % CHART_COLORS.length];
 }
 
 export function getBarDatum(entry: unknown) {

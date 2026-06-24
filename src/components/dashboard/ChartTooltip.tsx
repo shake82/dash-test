@@ -5,9 +5,10 @@ import { percent, wholeNumber } from "./formatters";
 type ChartTooltipProps = {
   active?: boolean;
   payload?: Array<{ payload: ChartDatum }>;
+  valueLabel?: string;
 };
 
-export function ChartTooltip({ active, payload }: ChartTooltipProps) {
+export function ChartTooltip({ active, payload, valueLabel = "rows" }: ChartTooltipProps) {
   if (!active || !payload?.length) {
     return null;
   }
@@ -20,7 +21,7 @@ export function ChartTooltip({ active, payload }: ChartTooltipProps) {
         {datum.label}
       </Text>
       <Text size="sm" c="dimmed">
-        {wholeNumber.format(datum.value)} rows, {percent.format(datum.share)}
+        {wholeNumber.format(datum.value)} {valueLabel}, {percent.format(datum.share)}
       </Text>
       {datum.isAggregate && datum.aggregateCount ? (
         <Text mt={4} size="xs" c="dimmed">

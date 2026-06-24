@@ -15,6 +15,7 @@ type DimensionHandle = {
   id: DimensionId;
   dimension: crossfilter.Dimension<DataRow, string>;
   group: crossfilter.Group<DataRow, string, number>;
+  colorIndexByValue: Map<string, number>;
 };
 
 type MetricAccumulator = {
@@ -30,6 +31,10 @@ let metricGroup: crossfilter.GroupAll<DataRow, MetricAccumulator> | null = null;
 let totalRows = 0;
 let currentConfig: SerializableDashboardConfig = { dimensions: [], metrics: [] };
 const activeFilters = new Map<DimensionId, Set<string>>();
+const defaultDimensionMeasure: NonNullable<SerializableDashboardConfig["dimensionMeasure"]> = {
+  kind: "count",
+  label: "rows",
+};
 
 const send = (message: DashboardWorkerOutMessage) => {
   self.postMessage(message);
@@ -64,6 +69,28 @@ const numberForMetric = (row: DataRow, field?: string) => {
 
   const value = Number(row[field]);
   return Number.isFinite(value) ? value : 0;
+};
+
+const getDimensionMeasure = () => currentConfig.dimensionMeasure ?? defaultDimensionMeasure;
+
+const getDimensionValueLabel = () => {
+  const measure = getDimensionMeasure();
+
+  if (measure.label) {
+    return measure.label;
+  }
+
+  return measure.kind === "sum" ? measure.field : "rows";
+};
+
+const numberForDimensionMeasure = (row: DataRow) => {
+  const measure = getDimensionMeasure();
+
+  if (measure.kind === "count") {
+    return 1;
+  }
+
+  return numberForMetric(row, measure.field);
 };
 
 const parseJsonPath = (jsonPath: string) => {
@@ -224,14 +251,38 @@ const initializeCrossfilter = (rows: DataRow[], config: SerializableDashboardCon
 
   for (const config of currentConfig.dimensions) {
     const dimension = cf.dimension((row) => valueForDimension(row, config));
-    const group = dimension.group<string, number>().reduceCount();
-    handles.set(config.id, { id: config.id, dimension, group });
+    const group =
+      getDimensionMeasure().kind === "sum"
+        ? dimension.group<string, number>().reduceSum(numberForDimensionMeasure)
+        : dimension.group<string, number>().reduceCount();
+    const colorIndexByValue = getInitialColorIndexByValue(group, config);
+    handles.set(config.id, { id: config.id, dimension, group, colorIndexByValue });
   }
 
   metricGroup = cf.groupAll<MetricAccumulator>().reduce(
     (state, row) => updateMetricAccumulator(state, row, 1),
     (state, row) => updateMetricAccumulator(state, row, -1),
     createMetricAccumulator,
+  );
+};
+
+const getInitialColorIndexByValue = (
+  group: crossfilter.Group<DataRow, string, number>,
+  config: SerializableDashboardConfig["dimensions"][number],
+) => {
+  return new Map(
+    group
+      .all()
+      .filter((item) => item.value > 0)
+      .map((item) => {
+        const key = String(item.key);
+        return { key, label: labelForDimensionValue(key, config), value: item.value };
+      })
+      .sort((a, b) => {
+        const byValue = b.value - a.value;
+        return byValue || a.label.localeCompare(b.label) || a.key.localeCompare(b.key);
+      })
+      .map((item, index) => [item.key, index]),
   );
 };
 
@@ -297,12 +348,14 @@ const toChartDatum = (
   totalCount: number,
   selected: Set<string>,
   config: SerializableDashboardConfig["dimensions"][number],
+  colorIndexByValue: Map<string, number>,
 ): ChartDatum => ({
   key: item.key,
   label: labelForDimensionValue(item.key, config),
   value: item.value,
   share: totalCount ? item.value / totalCount : 0,
   selected: selected.has(item.key),
+  colorIndex: colorIndexByValue.get(item.key),
 });
 
 const getVisibleValues = (
@@ -348,6 +401,7 @@ const getSummaries = (): DimensionSummary[] => {
         visibleCount: 0,
         hiddenCount: 0,
         totalCount: 0,
+        valueLabel: getDimensionValueLabel(),
         values: [],
         allValues: [],
       };
@@ -368,7 +422,7 @@ const getSummaries = (): DimensionSummary[] => {
     const chartType = groupedValues.length <= config.pieThreshold ? "pie" : "bar";
     const totalCount = groupedValues.reduce((sum, item) => sum + item.value, 0);
     const allValues = groupedValues.map((item) =>
-      toChartDatum(item, totalCount, selected, config),
+      toChartDatum(item, totalCount, selected, config, handle.colorIndexByValue),
     );
     const values = getVisibleValues(allValues, chartType, totalCount, visibleLimit);
     const hiddenCount =
@@ -381,6 +435,7 @@ const getSummaries = (): DimensionSummary[] => {
       visibleCount: values.length,
       hiddenCount,
       totalCount,
+      valueLabel: getDimensionValueLabel(),
       values,
       allValues,
     };

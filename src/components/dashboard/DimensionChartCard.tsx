@@ -34,7 +34,8 @@ export function DimensionChartCard({
               {summary.label}
             </Title>
             <Text size="sm" c="dimmed">
-              {wholeNumber.format(summary.totalCount)} rows across {summary.cardinality} items
+              {wholeNumber.format(summary.totalCount)} {summary.valueLabel} across{" "}
+              {summary.cardinality} items
             </Text>
           </Stack>
           <Group gap="xs" style={{ flexShrink: 0 }}>
@@ -63,7 +64,7 @@ export function DimensionChartCard({
           {summary.values.length === 0 ? (
             <Center h="100%">
               <Text size="sm" c="dimmed">
-                No rows
+                No {summary.valueLabel}
               </Text>
             </Center>
           ) : chartType === "pie" ? (

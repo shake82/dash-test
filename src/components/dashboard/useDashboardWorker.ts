@@ -86,6 +86,7 @@ function postToWorker(worker: Worker | null, message: DashboardWorkerInMessage) 
 function getSerializableConfig(config: DashboardConfig): SerializableDashboardConfig {
   return {
     metrics: config.metrics,
+    dimensionMeasure: config.dimensionMeasure,
     dimensions: config.dimensions.map(({ lookup, ...dimension }) => {
       if (!lookup || typeof lookup === "function") {
         return dimension;

@@ -28,8 +28,20 @@ export type MetricConfig = {
   format?: MetricFormat;
 };
 
+export type DimensionMeasure =
+  | {
+      kind: "count";
+      label?: string;
+    }
+  | {
+      kind: "sum";
+      field: string;
+      label?: string;
+    };
+
 export type DashboardConfig = {
   dimensions: DimensionConfig[];
+  dimensionMeasure?: DimensionMeasure;
   metrics: MetricConfig[];
 };
 
@@ -39,6 +51,7 @@ export type SerializableDimensionConfig = Omit<DimensionConfig, "lookup"> & {
 
 export type SerializableDashboardConfig = {
   dimensions: SerializableDimensionConfig[];
+  dimensionMeasure?: DimensionMeasure;
   metrics: MetricConfig[];
 };
 
@@ -48,6 +61,7 @@ export type ChartDatum = {
   value: number;
   share: number;
   selected: boolean;
+  colorIndex?: number;
   isAggregate?: boolean;
   aggregateCount?: number;
 };
@@ -58,6 +72,7 @@ export type DimensionSummary = DimensionConfig & {
   visibleCount: number;
   hiddenCount: number;
   totalCount: number;
+  valueLabel: string;
   values: ChartDatum[];
   allValues: ChartDatum[];
 };

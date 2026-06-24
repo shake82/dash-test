@@ -3,7 +3,7 @@ import type { DashboardConfig, DimensionConfig } from "@/lib/dashboardTypes";
 export const DIMENSIONS: DimensionConfig[] = [
   { id: "region", label: "Region", maxVisibleItems: 10, pieThreshold: 7 },
   { id: "category", label: "Category", maxVisibleItems: 12, pieThreshold: 7 },
-  { id: "product", label: "Product", maxVisibleItems: 6, pieThreshold: 8 },
+  { id: "product", label: "Product", maxVisibleItems: 8, pieThreshold: 8 },
   { id: "channel", label: "Channel", maxVisibleItems: 6, pieThreshold: 7 },
   { id: "segment", label: "Customer Segment", maxVisibleItems: 10, pieThreshold: 7 },
   { id: "status", label: "Status", maxVisibleItems: 10, pieThreshold: 7 },
@@ -13,6 +13,7 @@ export const DIMENSIONS: DimensionConfig[] = [
 
 export const DEFAULT_DASHBOARD_CONFIG: DashboardConfig = {
   dimensions: DIMENSIONS,
+  dimensionMeasure: { kind: "count", label: "rows" },
   metrics: [
     {
       id: "rows",

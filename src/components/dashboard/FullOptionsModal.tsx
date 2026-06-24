@@ -1,4 +1,16 @@
-import { Box, Modal, ScrollArea, Stack, Text, Title } from "@mantine/core";
+import { useMemo, useState } from "react";
+import {
+  ActionIcon,
+  Box,
+  Center,
+  Modal,
+  ScrollArea,
+  Stack,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
+import { Search, X } from "lucide-react";
 import {
   Bar,
   BarChart,
@@ -21,7 +33,30 @@ type FullOptionsModalProps = {
 };
 
 export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModalProps) {
-  const chartHeight = Math.max(340, Math.min(960, summary.allValues.length * 34));
+  const [query, setQuery] = useState("");
+
+  const normalizedQuery = query.trim().toLocaleLowerCase();
+
+  const filteredValues = useMemo(() => {
+    return summary.allValues
+      .filter((entry) => {
+        if (!normalizedQuery) {
+          return true;
+        }
+
+        return (
+          entry.label.toLocaleLowerCase().includes(normalizedQuery) ||
+          entry.key.toLocaleLowerCase().includes(normalizedQuery)
+        );
+      });
+  }, [normalizedQuery, summary.allValues]);
+
+  const isSearching = normalizedQuery.length > 0;
+  const chartHeight =
+    isSearching && filteredValues.length < 5
+      ? Math.max(120, filteredValues.length * 42)
+      : Math.max(340, Math.min(960, filteredValues.length * 34));
+  const hasActiveSelection = hasSelection(summary.allValues);
 
   return (
     <Modal
@@ -33,7 +68,8 @@ export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModa
             {summary.label}
           </Title>
           <Text size="sm" c="dimmed">
-            {summary.cardinality} options, {wholeNumber.format(summary.totalCount)} rows
+            {summary.cardinality} options, {wholeNumber.format(summary.totalCount)}{" "}
+            {summary.valueLabel}
           </Text>
         </Stack>
       }
@@ -42,49 +78,97 @@ export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModa
       scrollAreaComponent={ScrollArea.Autosize}
       radius="md"
       overlayProps={{ backgroundOpacity: 0.55, blur: 2 }}
+      styles={{
+        body: {
+          maxHeight: "66vh",
+          minHeight: "48vh",
+          overflowY: "auto",
+        },
+      }}
     >
-      <Box h={chartHeight}>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={summary.allValues}
-            layout="vertical"
-            margin={{ top: 4, right: 24, bottom: 4, left: 12 }}
-          >
-            <CartesianGrid horizontal={false} stroke="#e5e7eb" />
-            <XAxis type="number" hide />
-            <YAxis
-              type="category"
-              dataKey="label"
-              width={170}
-              tickLine={false}
-              axisLine={false}
-              interval={0}
-              tick={{ fill: "#525252", fontSize: 12 }}
-            />
-            <Tooltip content={<ChartTooltip />} />
-            <Bar
-              dataKey="value"
-              radius={[0, 5, 5, 0]}
-              isAnimationActive={false}
-              onClick={(entry) => {
-                const datum = getBarDatum(entry);
+      <Stack gap="sm">
+        <TextInput
+          aria-label={`Find ${summary.label} value`}
+          placeholder={`Find ${summary.label.toLocaleLowerCase()} value`}
+          leftSection={<Search size={16} aria-hidden="true" />}
+          rightSection={
+            query ? (
+              <ActionIcon
+                aria-label="Clear search"
+                variant="subtle"
+                color="gray"
+                size="sm"
+                onClick={() => setQuery("")}
+              >
+                <X size={15} aria-hidden="true" />
+              </ActionIcon>
+            ) : null
+          }
+          value={query}
+          onChange={(event) => setQuery(event.currentTarget.value)}
+        />
 
-                if (datum) {
-                  onToggle(summary.id, datum.key);
-                }
-              }}
-            >
-              {summary.allValues.map((entry, index) => (
-                <Cell
-                  key={entry.key}
-                  fill={getBarFill(entry, index)}
-                  opacity={hasSelection(summary.allValues) && !entry.selected ? 0.42 : 1}
+        {normalizedQuery ? (
+          <Text size="xs" c="dimmed">
+            {filteredValues.length} of {summary.cardinality} options
+          </Text>
+        ) : null}
+
+        <Box h={chartHeight}>
+          {filteredValues.length === 0 ? (
+            <Center h="100%">
+              <Text size="sm" c="dimmed">
+                No matching values
+              </Text>
+            </Center>
+          ) : (
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={filteredValues}
+                layout="vertical"
+                margin={{ top: 4, right: 24, bottom: 4, left: 0 }}
+              >
+                <CartesianGrid horizontal={false} stroke="#e5e7eb" />
+                <XAxis type="number" hide />
+                <YAxis
+                  type="category"
+                  dataKey="label"
+                  width={130}
+                  tickLine={false}
+                  axisLine={false}
+                  interval={0}
+                  tick={{ fill: "#525252", fontSize: 12 }}
                 />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </Box>
+                <Tooltip
+                  content={<ChartTooltip valueLabel={summary.valueLabel} />}
+                  isAnimationActive={false}
+                />
+                <Bar
+                  dataKey="value"
+                  radius={[0, 5, 5, 0]}
+                  maxBarSize={25}
+                  isAnimationActive={false}
+                  onClick={(entry) => {
+                    const datum = getBarDatum(entry);
+
+                    if (datum) {
+                      onToggle(summary.id, datum.key);
+                    }
+                  }}
+                >
+                  {filteredValues.map((entry, index) => (
+                    <Cell
+                      key={entry.key}
+                      fill={getBarFill(entry, index)}
+                      opacity={hasActiveSelection && !entry.selected ? 0.42 : 1}
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          )}
+        </Box>
+      </Stack>
     </Modal>
   );
 }
