@@ -90,11 +90,11 @@ export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModa
         body: {
           maxHeight: "66vh",
           minHeight: "48vh",
-          overflowY: "auto",
+          overflow: "hidden",
         },
       }}
     >
-      <Stack gap="sm">
+      <Stack gap="sm" h="48vh">
         <TextInput
           aria-label={`Find ${summary.label} value`}
           placeholder={`Find ${summary.label.toLocaleLowerCase()} value`}
@@ -122,54 +122,56 @@ export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModa
           </Text>
         ) : null}
 
-        <Box h={chartHeight}>
-          {filteredValues.length === 0 ? (
-            <Center h="100%">
-              <Text size="sm" c="dimmed">
-                No matching values
-              </Text>
-            </Center>
-          ) : (
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={filteredValues}
-                layout="vertical"
-                margin={{ top: 4, right: 24, bottom: 4, left: 0 }}
-              >
-                <CartesianGrid horizontal={false} stroke="#e5e7eb" />
-                <XAxis type="number" hide />
-                <YAxis
-                  type="category"
-                  dataKey="label"
-                  width={130}
-                  tickLine={false}
-                  axisLine={false}
-                  interval={0}
-                  tick={{ fill: "#525252", fontSize: 12 }}
-                />
-                <Tooltip
-                  content={<ChartTooltip valueLabel={summary.valueLabel} />}
-                  isAnimationActive={false}
-                />
-                <Bar
-                  dataKey="value"
-                  radius={[0, 5, 5, 0]}
-                  maxBarSize={25}
-                  background={{ fill: "#fff", fillOpacity: 0, pointerEvents: "all" }}
-                  isAnimationActive={false}
-                  onClick={handleBarClick}
+        <Box style={{ flex: "1 1 auto", minHeight: 0, overflowY: "auto" }}>
+          <Box h={chartHeight}>
+            {filteredValues.length === 0 ? (
+              <Center h="100%">
+                <Text size="sm" c="dimmed">
+                  No matching values
+                </Text>
+              </Center>
+            ) : (
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={filteredValues}
+                  layout="vertical"
+                  margin={{ top: 4, right: 24, bottom: 4, left: 0 }}
                 >
-                  {filteredValues.map((entry, index) => (
-                    <Cell
-                      key={entry.key}
-                      fill={getBarFill(entry, index)}
-                      opacity={hasActiveSelection && !entry.selected ? 0.42 : 1}
-                    />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          )}
+                  <CartesianGrid horizontal={false} stroke="#e5e7eb" />
+                  <XAxis type="number" hide />
+                  <YAxis
+                    type="category"
+                    dataKey="label"
+                    width={130}
+                    tickLine={false}
+                    axisLine={false}
+                    interval={0}
+                    tick={{ fill: "#525252", fontSize: 12 }}
+                  />
+                  <Tooltip
+                    content={<ChartTooltip valueLabel={summary.valueLabel} />}
+                    isAnimationActive={false}
+                  />
+                  <Bar
+                    dataKey="value"
+                    radius={[0, 5, 5, 0]}
+                    maxBarSize={25}
+                    background={{ fill: "#fff", fillOpacity: 0, pointerEvents: "all" }}
+                    isAnimationActive={false}
+                    onClick={handleBarClick}
+                  >
+                    {filteredValues.map((entry, index) => (
+                      <Cell
+                        key={entry.key}
+                        fill={getBarFill(entry, index)}
+                        opacity={hasActiveSelection && !entry.selected ? 0.42 : 1}
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            )}
+          </Box>
         </Box>
       </Stack>
     </Modal>
