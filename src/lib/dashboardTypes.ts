@@ -45,6 +45,12 @@ export type DashboardConfig = {
   metrics: MetricConfig[];
 };
 
+export type InitialDimensionAggregate = {
+  id: DimensionId;
+  value: string;
+  aggregate: number;
+};
+
 export type SerializableDimensionConfig = Omit<DimensionConfig, "lookup"> & {
   lookup?: Record<string, string>;
 };

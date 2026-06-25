@@ -97,7 +97,7 @@ function getSerializableConfig(config: DashboardConfig): SerializableDashboardCo
   };
 }
 
-function applyLookupLabels(
+export function applyLookupLabels(
   payload: WorkerStatePayload,
   config: DashboardConfig,
 ): WorkerStatePayload {

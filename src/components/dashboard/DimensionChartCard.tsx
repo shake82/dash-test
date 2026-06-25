@@ -1,7 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Button, Card, Center, Group, SegmentedControl, Stack, Text, Title } from "@mantine/core";
+import {
+  Badge,
+  Box,
+  Button,
+  Card,
+  Center,
+  Group,
+  SegmentedControl,
+  Stack,
+  Text,
+  Title,
+  Tooltip,
+} from "@mantine/core";
 import { Maximize2 } from "lucide-react";
 import type { DimensionId, DimensionSummary } from "@/lib/dashboardTypes";
 import { wholeNumber } from "./formatters";
@@ -9,6 +21,7 @@ import { BarDimension, PieDimension } from "./DimensionCharts";
 
 type DimensionChartCardProps = {
   summary: DimensionSummary;
+  canFilter?: boolean;
   onShowAll: () => void;
   onToggle: (dimensionId: DimensionId, value: string) => void;
 };
@@ -19,6 +32,7 @@ const chartTypeOptions: Array<{ label: string; value: DimensionSummary["chartTyp
 ];
 
 export function DimensionChartCard({
+  canFilter = true,
   summary,
   onShowAll,
   onToggle,
@@ -39,6 +53,17 @@ export function DimensionChartCard({
             </Text>
           </Stack>
           <Group gap="xs" style={{ flexShrink: 0 }}>
+            {!canFilter ? (
+              <Tooltip
+                label="Showing pre-rolled preview data. Chart filtering will be available when the full dataset finishes loading."
+                openDelay={250}
+                withArrow
+              >
+                <Badge color="yellow" variant="light" radius="sm" tt="none">
+                  Preview
+                </Badge>
+              </Tooltip>
+            ) : null}
             {summary.hiddenCount ? (
               <Button
                 variant="default"
@@ -68,9 +93,19 @@ export function DimensionChartCard({
               </Text>
             </Center>
           ) : chartType === "pie" ? (
-            <PieDimension summary={summary} onShowAll={onShowAll} onToggle={onToggle} />
+            <PieDimension
+              summary={summary}
+              canFilter={canFilter}
+              onShowAll={onShowAll}
+              onToggle={onToggle}
+            />
           ) : (
-            <BarDimension summary={summary} onShowAll={onShowAll} onToggle={onToggle} />
+            <BarDimension
+              summary={summary}
+              canFilter={canFilter}
+              onShowAll={onShowAll}
+              onToggle={onToggle}
+            />
           )}
         </Box>
 

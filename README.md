@@ -1,5 +1,29 @@
 # React + TypeScript + Vite
 
+## Crossfilter preview data
+
+`CrossfilterDashboard` accepts an optional `initialStateUrl` prop. When provided, the
+component fetches that lightweight endpoint on the main thread and renders its
+pre-rolled dimension aggregates while the full `dataUrl` dataset is still loading
+and indexing in the worker. The client inflates those aggregates into the
+`WorkerStatePayload` shape used by the charts.
+
+The preview endpoint should return an array of dimension aggregate rows:
+
+```ts
+type InitialDimensionAggregate = {
+  id: DimensionId;
+  value: string;
+  aggregate: number;
+};
+```
+
+The intended use is a no-filter snapshot across all configured dimensions. The
+server is responsible for returning values and aggregates in that shape; the
+client uses the dashboard configuration to calculate chart type, cardinality,
+visible values, hidden counts, labels, and shares before rendering. Filtering is
+enabled only after the full crossfilter state is ready.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

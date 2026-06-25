@@ -18,16 +18,26 @@ import { getBarDatum, getBarFill, hasSelection } from "./chartUtils";
 
 type DimensionChartProps = {
   summary: DimensionSummary;
+  canFilter?: boolean;
   onShowAll: () => void;
   onToggle: (dimensionId: DimensionId, value: string) => void;
 };
 
-export function PieDimension({ summary, onShowAll, onToggle }: DimensionChartProps) {
+export function PieDimension({
+  canFilter = true,
+  summary,
+  onShowAll,
+  onToggle,
+}: DimensionChartProps) {
   const hasActiveSelection = hasSelection(summary.values);
 
   const handleItemClick = (entry: ChartDatum) => {
     if (entry.isAggregate) {
       onShowAll();
+      return;
+    }
+
+    if (!canFilter) {
       return;
     }
 
@@ -66,7 +76,7 @@ export function PieDimension({ summary, onShowAll, onToggle }: DimensionChartPro
                   fill={getPieFill(entry, index)}
                   opacity={hasActiveSelection && !entry.selected ? 0.38 : 1}
                   onClick={() => handleItemClick(entry)}
-                  style={{ outline: "none", cursor: "pointer" }}
+                  style={{ outline: "none", cursor: canFilter ? "pointer" : "default" }}
                 />
               ))}
             </Pie>
@@ -91,7 +101,7 @@ export function PieDimension({ summary, onShowAll, onToggle }: DimensionChartPro
               style={{
                 alignItems: "center",
                 borderRadius: 4,
-                cursor: "pointer",
+                cursor: canFilter ? "pointer" : "default",
                 display: "flex",
                 gap: 6,
                 maxWidth: 128,
@@ -120,7 +130,12 @@ export function PieDimension({ summary, onShowAll, onToggle }: DimensionChartPro
   );
 }
 
-export function BarDimension({ summary, onShowAll, onToggle }: DimensionChartProps) {
+export function BarDimension({
+  canFilter = true,
+  summary,
+  onShowAll,
+  onToggle,
+}: DimensionChartProps) {
   const handleBarClick = (entry: unknown) => {
     const datum = getBarDatum(entry);
 
@@ -130,6 +145,10 @@ export function BarDimension({ summary, onShowAll, onToggle }: DimensionChartPro
 
     if (datum.isAggregate) {
       onShowAll();
+      return;
+    }
+
+    if (!canFilter) {
       return;
     }
 

@@ -28,11 +28,17 @@ import { wholeNumber } from "./formatters";
 
 type FullOptionsModalProps = {
   summary: DimensionSummary;
+  canFilter?: boolean;
   onClose: () => void;
   onToggle: (dimensionId: DimensionId, value: string) => void;
 };
 
-export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModalProps) {
+export function FullOptionsModal({
+  canFilter = true,
+  summary,
+  onClose,
+  onToggle,
+}: FullOptionsModalProps) {
   const [query, setQuery] = useState("");
 
   const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -61,7 +67,7 @@ export function FullOptionsModal({ summary, onClose, onToggle }: FullOptionsModa
   const handleBarClick = (entry: unknown) => {
     const datum = getBarDatum(entry);
 
-    if (datum) {
+    if (datum && canFilter) {
       onToggle(summary.id, datum.key);
     }
   };

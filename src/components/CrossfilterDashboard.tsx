@@ -11,17 +11,23 @@ import { MetricStrip } from "@/components/dashboard/MetricStrip";
 import { selectedCount } from "@/components/dashboard/formatters";
 import { useDashboardWorker } from "@/components/dashboard/useDashboardWorker";
 import { DEFAULT_DASHBOARD_CONFIG } from "@/lib/dashboardConfig";
-import type { DashboardConfig, DimensionId } from "@/lib/dashboardTypes";
+import {
+  createInitialDashboardState,
+  parseInitialDimensionAggregates,
+} from "@/lib/initialDashboardState";
+import type { DashboardConfig, DimensionId, WorkerStatePayload } from "@/lib/dashboardTypes";
 
 type Props = {
   dataUrl: string;
   config?: DashboardConfig;
+  initialStateUrl?: string;
   jsonPath?: string;
 };
 
 export function CrossfilterDashboard({
   config = DEFAULT_DASHBOARD_CONFIG,
   dataUrl,
+  initialStateUrl,
   jsonPath = ".",
 }: Props) {
   const { dashboardState, error, progress, send, status } = useDashboardWorker(
@@ -29,7 +35,10 @@ export function CrossfilterDashboard({
     jsonPath,
     config,
   );
+  const { initialState, initialStateError } = useInitialDashboardState(initialStateUrl, config);
   const [expandedDimensionId, setExpandedDimensionId] = useState<DimensionId | null>(null);
+  const displayState = dashboardState ?? initialState;
+  const canFilter = Boolean(dashboardState) && status === "ready";
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -42,12 +51,12 @@ export function CrossfilterDashboard({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const filterCount = selectedCount(dashboardState?.activeFilters ?? {});
+  const filterCount = selectedCount(displayState?.activeFilters ?? {});
 
   const filterEntries = useMemo(() => {
-    const active = dashboardState?.activeFilters ?? {};
+    const active = displayState?.activeFilters ?? {};
     return Object.entries(active) as Array<[DimensionId, string[]]>;
-  }, [dashboardState?.activeFilters]);
+  }, [displayState?.activeFilters]);
 
   const dimensionLabels = useMemo(() => {
     return new Map(config.dimensions.map((item) => [item.id, item.label]));
@@ -75,8 +84,8 @@ export function CrossfilterDashboard({
   );
 
   const expandedSummary = useMemo(() => {
-    return dashboardState?.dimensions.find((item) => item.id === expandedDimensionId) ?? null;
-  }, [dashboardState?.dimensions, expandedDimensionId]);
+    return displayState?.dimensions.find((item) => item.id === expandedDimensionId) ?? null;
+  }, [displayState?.dimensions, expandedDimensionId]);
 
   return (
     <Box component="main" mih="100vh" bg="gray.0" c="ink.9">
@@ -85,46 +94,66 @@ export function CrossfilterDashboard({
           status={status}
           progress={progress}
           filterCount={filterCount}
-          onClearFilters={() => send({ type: "clearAllFilters" })}
+          onClearFilters={() => {
+            if (canFilter) {
+              send({ type: "clearAllFilters" });
+            }
+          }}
         />
 
         {status === "error" ? (
           <ErrorState message={error ?? "Unable to load the dataset."} />
         ) : null}
 
-        {status === "loading" ? <LoadingState progress={progress} /> : null}
+        {initialStateError && !initialState && status === "loading" ? (
+          <ErrorState message={initialStateError} />
+        ) : null}
 
-        {dashboardState && status === "ready" ? (
+        {status === "loading" && !displayState ? <LoadingState progress={progress} /> : null}
+
+        {displayState ? (
           <>
-            <MetricStrip state={dashboardState} />
+            <MetricStrip state={displayState} />
             <ActiveFiltersBar
               dimensionLabels={dimensionLabels}
               entries={filterEntries}
               getValueLabel={getValueLabel}
-              onClearFilter={(dimensionId) => send({ type: "clearFilter", dimensionId })}
-              onRemoveValue={(dimensionId, value) =>
-                send({ type: "toggleFilter", dimensionId, value })
-              }
+              onClearFilter={(dimensionId) => {
+                if (canFilter) {
+                  send({ type: "clearFilter", dimensionId });
+                }
+              }}
+              onRemoveValue={(dimensionId, value) => {
+                if (canFilter) {
+                  send({ type: "toggleFilter", dimensionId, value });
+                }
+              }}
             />
             <SimpleGrid cols={{ base: 1, lg: 2, xl: 3 }} spacing="md">
-              {dashboardState.dimensions.map((summary) => (
+              {displayState.dimensions.map((summary) => (
                 <DimensionChartCard
                   key={summary.id}
                   summary={summary}
+                  canFilter={canFilter}
                   onShowAll={() => setExpandedDimensionId(summary.id)}
-                  onToggle={(dimensionId, value) =>
-                    send({ type: "toggleFilter", dimensionId, value })
-                  }
+                  onToggle={(dimensionId, value) => {
+                    if (canFilter) {
+                      send({ type: "toggleFilter", dimensionId, value });
+                    }
+                  }}
                 />
               ))}
             </SimpleGrid>
             {expandedSummary ? (
               <FullOptionsModal
                 summary={expandedSummary}
+                canFilter={canFilter}
                 onClose={() => setExpandedDimensionId(null)}
-                onToggle={(dimensionId, value) =>
-                  send({ type: "toggleFilter", dimensionId, value })
-                }
+                onToggle={(dimensionId, value) => {
+                  if (canFilter) {
+                    send({ type: "toggleFilter", dimensionId, value });
+                  }
+                }}
               />
             ) : null}
           </>
@@ -132,4 +161,69 @@ export function CrossfilterDashboard({
       </Stack>
     </Box>
   );
+}
+
+function useInitialDashboardState(
+  initialStateUrl: string | undefined,
+  config: DashboardConfig,
+) {
+  const [initialState, setInitialState] = useState<{
+    payload: WorkerStatePayload;
+    url: string;
+  } | null>(null);
+  const [initialStateError, setInitialStateError] = useState<{
+    message: string;
+    url: string;
+  } | null>(null);
+
+  useEffect(() => {
+    if (!initialStateUrl) {
+      return;
+    }
+
+    const controller = new AbortController();
+
+    fetch(initialStateUrl, { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error(`Initial dashboard state request failed with ${response.status}`);
+        }
+
+        return response.json() as Promise<unknown>;
+      })
+      .then((payload) => {
+        setInitialState({
+          payload: createInitialDashboardState(
+            parseInitialDimensionAggregates(payload),
+            config,
+          ),
+          url: initialStateUrl,
+        });
+      })
+      .catch((error: unknown) => {
+        if (controller.signal.aborted) {
+          return;
+        }
+
+        setInitialStateError({
+          message:
+            error instanceof Error ? error.message : "Unable to load initial dashboard state.",
+          url: initialStateUrl,
+        });
+      });
+
+    return () => controller.abort();
+  }, [config, initialStateUrl]);
+
+  const matchingInitialState =
+    initialState && initialState.url === initialStateUrl ? initialState.payload : null;
+  const matchingInitialStateError =
+    initialStateError && initialStateError.url === initialStateUrl
+      ? initialStateError.message
+      : null;
+
+  return {
+    initialState: matchingInitialState,
+    initialStateError: matchingInitialStateError,
+  };
 }
