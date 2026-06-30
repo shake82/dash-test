@@ -1,14 +1,16 @@
 import type { DashboardConfig, DimensionConfig } from "@/lib/dashboardTypes";
 
 export const DIMENSIONS: DimensionConfig[] = [
-  { id: "region", label: "Region", maxVisibleItems: 10, pieThreshold: 7 },
-  { id: "category", label: "Category", maxVisibleItems: 12, pieThreshold: 7 },
-  { id: "product", label: "Product", maxVisibleItems: 8, pieThreshold: 8 },
-  { id: "channel", label: "Channel", maxVisibleItems: 6, pieThreshold: 7 },
-  { id: "segment", label: "Customer Segment", maxVisibleItems: 10, pieThreshold: 7 },
-  { id: "status", label: "Status", maxVisibleItems: 10, pieThreshold: 7 },
-  { id: "quarter", label: "Quarter", maxVisibleItems: 12, pieThreshold: 8 },
-  { id: "owner", label: "Account Owner", maxVisibleItems: 6, pieThreshold: 6 },
+  { id: "currentLocationCode", label: "Current Location Code", maxVisibleItems: 10, pieThreshold: 7 },
+  { id: "fcoLocationCode", label: "FCO Location Code", maxVisibleItems: 10, pieThreshold: 7 },
+  { id: "adjudicationLocationCode", label: "Adjudication Location Code", maxVisibleItems: 10, pieThreshold: 7 },
+  { id: "caseSubstatusCode", label: "Case Substatus Code", maxVisibleItems: 10, pieThreshold: 7 },
+  { id: "filingCategoryCode", label: "Filing Category Code", maxVisibleItems: 10, pieThreshold: 7 },
+  { id: "atNBC", label: "At NBC", maxVisibleItems: 2, pieThreshold: 7 },
+  { id: "milnatzInd", label: "MILNATZ Indicator", maxVisibleItems: 2, pieThreshold: 7 },
+  { id: "uscisReceiptDate", label: "USCIS Receipt Date", maxVisibleItems: 12, pieThreshold: 8 },
+  { id: "channelTypeCode", label: "Channel Type Code", maxVisibleItems: 10, pieThreshold: 7 },
+  { id: "isRemoteInd", label: "Remote Indicator", maxVisibleItems: 2, pieThreshold: 7 },
 ];
 
 export const DEFAULT_DASHBOARD_CONFIG: DashboardConfig = {

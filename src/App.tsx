@@ -34,7 +34,8 @@ function App() {
     <CrossfilterDashboard
       config={DEFAULT_DASHBOARD_CONFIG}
       dataUrl="/api/dashboard-data.json"
-      initialStateUrl="/api/dashboard-data-preview.json"
+      jsonPath='.data'
+      // initialStateUrl="/api/dashboard-data-preview.json"
     />
   </MantineProvider>);
 }
