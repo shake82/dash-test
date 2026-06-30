@@ -53,7 +53,7 @@ const buildRows = (count: number): DataRow[] => {
       total: 1 + ((index * 37) % 250),
       milnatzInd: index % 5 === 0 ? "Y" : "N",
       uscisReceiptDate: receiptDate.toISOString().slice(0, 10),
-      channelTypeCode: pick(channelTypeCodes, index, 5),
+      channelTypeCode: pick(channelTypeCodes, index, 7),
       currentLocationCode: pick(locationCodes, index, 13),
       fcoLocationCode: pick(locationCodes, index, 17),
       adjudicationLocationCode: pick(locationCodes, index, 19),
