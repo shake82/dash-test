@@ -1,16 +1,18 @@
 import type { DashboardConfig, DimensionConfig } from "@/lib/dashboardTypes";
 
+const yesNLookup =  (v: string)=> v=== 'Y'? 'Yes': 'No'
+
 export const DIMENSIONS: DimensionConfig[] = [
   { id: "currentLocationCode", label: "Current Location Code", maxVisibleItems: 10, pieThreshold: 7 },
   { id: "fcoLocationCode", label: "FCO Location Code", maxVisibleItems: 10, pieThreshold: 7 },
   { id: "adjudicationLocationCode", label: "Adjudication Location Code", maxVisibleItems: 10, pieThreshold: 7 },
   { id: "caseSubstatusCode", label: "Case Substatus Code", maxVisibleItems: 10, pieThreshold: 7 },
   { id: "filingCategoryCode", label: "Filing Category Code", maxVisibleItems: 10, pieThreshold: 7 },
-  { id: "atNBC", label: "At NBC", maxVisibleItems: 2, pieThreshold: 7 },
-  { id: "milnatzInd", label: "MILNATZ Indicator", maxVisibleItems: 2, pieThreshold: 7 },
+  { id: "atNBC", label: "At NBC", maxVisibleItems: 2, pieThreshold: 7 ,lookup: yesNLookup },
+  { id: "milnatzInd", label: "MILNATZ Indicator", maxVisibleItems: 2, pieThreshold: 7 ,lookup: yesNLookup },
   { id: "uscisReceiptDate", label: "USCIS Receipt Date", maxVisibleItems: 12, pieThreshold: 8 },
   { id: "channelTypeCode", label: "Channel Type Code", maxVisibleItems: 10, pieThreshold: 7 },
-  { id: "isRemoteInd", label: "Remote Indicator", maxVisibleItems: 2, pieThreshold: 7 },
+  { id: "isRemoteInd", label: "Remote Indicator", maxVisibleItems: 2, pieThreshold: 7, lookup: yesNLookup  },
 ];
 
 export const DEFAULT_DASHBOARD_CONFIG: DashboardConfig = {

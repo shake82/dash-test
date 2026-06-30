@@ -22,6 +22,7 @@ import {
   YAxis,
 } from "recharts";
 import type { DimensionId, DimensionSummary } from "@/lib/dashboardTypes";
+import { BarAxisTick } from "./BarAxisTick";
 import { ChartTooltip } from "./ChartTooltip";
 import { getBarDatum, getBarFill, hasSelection } from "./chartUtils";
 import { wholeNumber } from "./formatters";
@@ -152,7 +153,7 @@ export function FullOptionsModal({
                     tickLine={false}
                     axisLine={false}
                     interval={0}
-                    tick={{ fill: "#525252", fontSize: 12 }}
+                    tick={<BarAxisTick maxWidth={122} />}
                   />
                   <Tooltip
                     content={<ChartTooltip valueLabel={summary.valueLabel} />}

@@ -26,20 +26,20 @@
   },
   "locationCodes": {
     "NBC": "NBC",
-    "MSC": "MSC",
+    "MSC": "National Benefits Center",
     "IOE": "IOE",
     "LIN": "LIN",
-    "SRC": "SRC",
-    "WAC": "WAC",
-    "EAC": "EAC",
-    "YSC": "YSC",
+    "SRC": "Texas Service Center",
+    "WAC": "California Service Center",
+    "EAC": "Vermont Service Center",
+    "YSC": "Potomac Service Center",
     "FCO": "FCO",
-    "ATL": "ATL",
-    "CHI": "CHI",
-    "DAL": "DAL",
-    "HOU": "HOU",
-    "LAX": "LAX",
-    "NYC": "NYC",
-    "SEA": "SEA"
+    "ATL": "Atlanta",
+    "CHI": "Chantilly",
+    "DAL": "Dallas",
+    "HOU": "Houston",
+    "LAX": "Los Angeles",
+    "NYC": "New York City",
+    "SEA": "Seatle"
   }
 }

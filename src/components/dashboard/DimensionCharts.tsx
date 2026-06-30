@@ -13,6 +13,7 @@ import {
 import { Box, Group, Text, UnstyledButton } from "@mantine/core";
 import { CHART_COLORS } from "@/lib/dashboardConfig";
 import type { ChartDatum, DimensionId, DimensionSummary } from "@/lib/dashboardTypes";
+import { BarAxisTick } from "./BarAxisTick";
 import { ChartTooltip } from "./ChartTooltip";
 import { getBarDatum, getBarFill, hasSelection } from "./chartUtils";
 
@@ -171,7 +172,7 @@ export function BarDimension({
           interval={0}
           tickLine={false}
           axisLine={false}
-          tick={{ fill: "#525252", fontSize: 12 }}
+          tick={<BarAxisTick maxWidth={112} />}
         />
         <Tooltip
           content={<ChartTooltip valueLabel={summary.valueLabel} />}
