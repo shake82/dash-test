@@ -1,0 +1,45 @@
+{
+  "caseSubstatusCodes": {
+    "1": "Case Substatus 1",
+    "2": "Case Substatus 2",
+    "3": "Case Substatus 3",
+    "4": "Case Substatus 4",
+    "5": "Case Substatus 5",
+    "6": "Case Substatus 6",
+    "7": "Case Substatus 7",
+    "8": "Case Substatus 8"
+  },
+  "filingCategoryCodes": {
+    "101": "Filing Category 101",
+    "102": "Filing Category 102",
+    "103": "Filing Category 103",
+    "104": "Filing Category 104",
+    "105": "Filing Category 105",
+    "106": "Filing Category 106"
+  },
+  "channelTypeCodes": {
+    "10": "C4",
+    "20": "EFile",
+    "30": "Lockbox PDF",
+    "40": "Lookbox",
+    "50": "XYZ"
+  },
+  "locationCodes": {
+    "NBC": "NBC",
+    "MSC": "MSC",
+    "IOE": "IOE",
+    "LIN": "LIN",
+    "SRC": "SRC",
+    "WAC": "WAC",
+    "EAC": "EAC",
+    "YSC": "YSC",
+    "FCO": "FCO",
+    "ATL": "ATL",
+    "CHI": "CHI",
+    "DAL": "DAL",
+    "HOU": "HOU",
+    "LAX": "LAX",
+    "NYC": "NYC",
+    "SEA": "SEA"
+  }
+}

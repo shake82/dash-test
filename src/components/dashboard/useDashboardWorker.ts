@@ -88,7 +88,11 @@ function getSerializableConfig(config: DashboardConfig): SerializableDashboardCo
     metrics: config.metrics,
     dimensionMeasure: config.dimensionMeasure,
     dimensions: config.dimensions.map(({ lookup, ...dimension }) => {
-      if (!lookup || typeof lookup === "function") {
+      if (typeof lookup === "function") {
+        return { ...dimension, hasLookupFunction: true };
+      }
+
+      if (!lookup) {
         return dimension;
       }
 
@@ -141,24 +145,27 @@ function applyDatumLookupLabel(
     return { ...datum, label: datum.label || datum.key };
   }
 
+  if (!dimensionConfig.lookup) {
+    return datum;
+  }
+
+  if (typeof dimensionConfig.lookup === "function") {
+    return {
+      ...datum,
+      label: dimensionConfig.lookup(datum.key) ?? datum.key,
+    };
+  }
+
+  const configuredLabel = dimensionConfig.lookup[datum.key];
+
+  if (configuredLabel === undefined) {
+    return datum;
+  }
+
   return {
     ...datum,
-    label: getLookupLabel(datum.key, dimensionConfig),
+    label: configuredLabel,
   };
-}
-
-function getLookupLabel(value: string, dimensionConfig: DimensionConfig) {
-  const { lookup } = dimensionConfig;
-
-  if (!lookup) {
-    return value;
-  }
-
-  if (typeof lookup === "function") {
-    return lookup(value) ?? value;
-  }
-
-  return lookup[value] ?? value;
 }
 
 function getVisibleValues(

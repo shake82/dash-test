@@ -23,13 +23,18 @@ type MetricAccumulator = {
   sums: Record<string, number>;
 };
 
+type LookupDef = Record<string, string>;
+type LookupMap = Record<string, LookupDef>;
+
 const AGGREGATE_LABEL = "Others";
+const LOOKUP_URL = "/api/lookup.json";
 
 let cf: crossfilter.Crossfilter<DataRow> | null = null;
 let handles = new Map<DimensionId, DimensionHandle>();
 let metricGroup: crossfilter.GroupAll<DataRow, MetricAccumulator> | null = null;
 let totalRows = 0;
 let currentConfig: SerializableDashboardConfig = { dimensions: [], metrics: [] };
+let lookupMap: LookupMap = {};
 const activeFilters = new Map<DimensionId, Set<string>>();
 const defaultDimensionMeasure: NonNullable<SerializableDashboardConfig["dimensionMeasure"]> = {
   kind: "count",
@@ -59,7 +64,93 @@ const labelForDimensionValue = (
   value: string,
   config: SerializableDashboardConfig["dimensions"][number],
 ) => {
-  return config.lookup?.[value] ?? value;
+  const configuredLabel = config.lookup?.[value];
+
+  if (configuredLabel !== undefined) {
+    return configuredLabel;
+  }
+
+  if (config.hasLookupFunction) {
+    return value;
+  }
+
+  return getLookupMapLabel(value, config) ?? value;
+};
+
+const getLookupMapLabel = (
+  value: string,
+  config: SerializableDashboardConfig["dimensions"][number],
+) => {
+  return getLookupDef(config)?.[value];
+};
+
+const getLookupDef = (
+  config: SerializableDashboardConfig["dimensions"][number],
+) => {
+  for (const key of getLookupKeys(config)) {
+    const lookup = lookupMap[key];
+
+    if (lookup) {
+      return lookup;
+    }
+  }
+
+  return undefined;
+};
+
+const getLookupKeys = (
+  config: SerializableDashboardConfig["dimensions"][number],
+) => {
+  const sourceKey = config.field ?? config.id;
+  const keys = [config.id, sourceKey];
+
+  for (const key of [...keys]) {
+    if (key.endsWith("Code")) {
+      keys.push(`${key}s`);
+    }
+
+    if (key.endsWith("LocationCode")) {
+      keys.push("locationCodes");
+    }
+  }
+
+  return [...new Set(keys)];
+};
+
+const readLookupMap = async (url = LOOKUP_URL): Promise<LookupMap> => {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      return {};
+    }
+
+    return parseLookupMap(await response.json());
+  } catch {
+    return {};
+  }
+};
+
+const parseLookupMap = (value: unknown): LookupMap => {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    Object.entries(value as Record<string, unknown>).flatMap(([lookupKey, lookupValue]) => {
+      if (!lookupValue || typeof lookupValue !== "object" || Array.isArray(lookupValue)) {
+        return [];
+      }
+
+      const lookup = Object.fromEntries(
+        Object.entries(lookupValue as Record<string, unknown>).flatMap(([key, label]) => {
+          return typeof label === "string" ? [[key, label]] : [];
+        }),
+      );
+
+      return Object.keys(lookup).length ? [[lookupKey, lookup]] : [];
+    }),
+  );
 };
 
 const numberForMetric = (row: DataRow, field?: string) => {
@@ -489,7 +580,11 @@ self.onmessage = async (event: MessageEvent<DashboardWorkerInMessage>) => {
     const message = event.data;
 
     if (message.type === "load") {
-      const rows = await readDataset(message.url, message.jsonPath);
+      const [rows, fetchedLookupMap] = await Promise.all([
+        readDataset(message.url, message.jsonPath),
+        readLookupMap(),
+      ]);
+      lookupMap = fetchedLookupMap;
 
       send({
         type: "progress",

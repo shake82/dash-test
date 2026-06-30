@@ -52,6 +52,7 @@ export type InitialDimensionAggregate = {
 };
 
 export type SerializableDimensionConfig = Omit<DimensionConfig, "lookup"> & {
+  hasLookupFunction?: boolean;
   lookup?: Record<string, string>;
 };
 

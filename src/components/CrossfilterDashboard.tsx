@@ -66,21 +66,34 @@ export function CrossfilterDashboard({
     return new Map(config.dimensions.map((item) => [item.id, item.lookup]));
   }, [config]);
 
+  const dimensionValueLabels = useMemo(() => {
+    const labels = new Map<DimensionId, Map<string, string>>();
+
+    for (const dimension of displayState?.dimensions ?? []) {
+      labels.set(
+        dimension.id,
+        new Map(dimension.allValues.map((item) => [item.key, item.label])),
+      );
+    }
+
+    return labels;
+  }, [displayState?.dimensions]);
+
   const getValueLabel = useCallback(
     (dimensionId: DimensionId, value: string) => {
       const lookup = dimensionLookups.get(dimensionId);
 
       if (!lookup) {
-        return value;
+        return dimensionValueLabels.get(dimensionId)?.get(value) ?? value;
       }
 
       if (typeof lookup === "function") {
         return lookup(value) ?? value;
       }
 
-      return lookup[value] ?? value;
+      return lookup[value] ?? dimensionValueLabels.get(dimensionId)?.get(value) ?? value;
     },
-    [dimensionLookups],
+    [dimensionLookups, dimensionValueLabels],
   );
 
   const expandedSummary = useMemo(() => {
