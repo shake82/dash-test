@@ -34,6 +34,10 @@ type FullOptionsModalProps = {
   onToggle: (dimensionId: DimensionId, value: string) => void;
 };
 
+const EMPTY_CHART_HEIGHT = 120;
+const MIN_CHART_HEIGHT = 340;
+const MIN_BAR_ROW_HEIGHT = 34;
+
 export function FullOptionsModal({
   canFilter = true,
   summary,
@@ -58,11 +62,9 @@ export function FullOptionsModal({
       });
   }, [normalizedQuery, summary.allValues]);
 
-  const isSearching = normalizedQuery.length > 0;
-  const chartHeight =
-    isSearching && filteredValues.length < 5
-      ? Math.max(120, filteredValues.length * 42)
-      : Math.max(340, Math.min(960, filteredValues.length * 34));
+  const chartHeight = filteredValues.length
+    ? Math.max(MIN_CHART_HEIGHT, filteredValues.length * MIN_BAR_ROW_HEIGHT)
+    : EMPTY_CHART_HEIGHT;
   const hasActiveSelection = hasSelection(summary.allValues);
 
   const handleBarClick = (entry: unknown) => {
