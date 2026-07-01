@@ -38,13 +38,42 @@ const locationCodes = [
   "SEA",
 ];
 
+const receiptYears = [2020, 2021, 2022, 2023, 2024, 2025, 2026];
+const receiptYearWeightTotal = receiptYears.reduce((sum, _, index) => sum + index + 1, 0);
+
 const pick = <T,>(items: T[], index: number, salt: number) => {
   return items[(index * salt + salt) % items.length];
 };
 
+const getDaysInYear = (year: number) => {
+  return new Date(Date.UTC(year + 1, 0, 0)).getUTCDate();
+};
+
+const getReceiptYear = (index: number, count: number) => {
+  const weightedPosition = ((index + 0.5) / count) * receiptYearWeightTotal;
+  let cumulativeWeight = 0;
+
+  for (let yearIndex = 0; yearIndex < receiptYears.length; yearIndex += 1) {
+    cumulativeWeight += yearIndex + 1;
+
+    if (weightedPosition <= cumulativeWeight) {
+      return receiptYears[yearIndex];
+    }
+  }
+
+  return receiptYears[receiptYears.length - 1];
+};
+
+const getReceiptDate = (index: number, count: number) => {
+  const year = getReceiptYear(index, count);
+  const dayOffset = index % getDaysInYear(year);
+
+  return new Date(Date.UTC(year, 0, 1 + dayOffset));
+};
+
 const buildRows = (count: number): DataRow[] => {
   return Array.from({ length: count }, (_, index) => {
-    const receiptDate = new Date(Date.UTC(2024, 0, 1 + (index % 730)));
+    const receiptDate = getReceiptDate(index, count);
 
     return {
       caseSubstatusCode: pick(caseSubstatusCodes, index, 7),
