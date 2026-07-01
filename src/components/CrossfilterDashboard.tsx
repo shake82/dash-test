@@ -109,18 +109,50 @@ export function CrossfilterDashboard({
   return (
     <Box component="main" mih="100vh" bg="gray.0" c="ink.9">
       <Stack maw={1800} mx="auto" gap="md" px={{ base: "md", sm: "xl" }} py="md">
-        <DashboardHeader
-          status={status}
-          progress={progress}
-          filterCount={filterCount}
-          filteredTotal={filteredTotal}
-          onClearFilters={() => {
-            if (canFilter) {
-              send({ type: "clearAllFilters" });
-            }
+        <Box
+          style={{
+            background: "var(--mantine-color-gray-0)",
+            position: "sticky",
+            top: 0,
+            zIndex: 20,
           }}
-          onViewDetail={() => setDetailModalOpen(true)}
-        />
+        >
+          <Stack gap="sm" pb="sm">
+            <DashboardHeader
+              status={status}
+              progress={progress}
+              filterCount={filterCount}
+              filteredTotal={filteredTotal}
+              onClearFilters={() => {
+                if (canFilter) {
+                  send({ type: "clearAllFilters" });
+                }
+              }}
+              onViewDetail={() => setDetailModalOpen(true)}
+            />
+
+            {displayState ? (
+              <>
+                <MetricStrip compact state={displayState} />
+                <ActiveFiltersBar
+                  dimensionLabels={dimensionLabels}
+                  entries={filterEntries}
+                  getValueLabel={getValueLabel}
+                  onClearFilter={(dimensionId) => {
+                    if (canFilter) {
+                      send({ type: "clearFilter", dimensionId });
+                    }
+                  }}
+                  onRemoveValue={(dimensionId, value) => {
+                    if (canFilter) {
+                      send({ type: "toggleFilter", dimensionId, value });
+                    }
+                  }}
+                />
+              </>
+            ) : null}
+          </Stack>
+        </Box>
 
         {status === "error" ? (
           <ErrorState message={error ?? "Unable to load the dataset."} />
@@ -134,22 +166,6 @@ export function CrossfilterDashboard({
 
         {displayState ? (
           <>
-            <MetricStrip state={displayState} />
-            <ActiveFiltersBar
-              dimensionLabels={dimensionLabels}
-              entries={filterEntries}
-              getValueLabel={getValueLabel}
-              onClearFilter={(dimensionId) => {
-                if (canFilter) {
-                  send({ type: "clearFilter", dimensionId });
-                }
-              }}
-              onRemoveValue={(dimensionId, value) => {
-                if (canFilter) {
-                  send({ type: "toggleFilter", dimensionId, value });
-                }
-              }}
-            />
             <SimpleGrid cols={{ base: 1, lg: 2, xl: 3 }} spacing="md">
               {displayState.dimensions.map((summary) => (
                 <DimensionChartCard

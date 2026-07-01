@@ -2,16 +2,22 @@ import { Card, SimpleGrid, Text } from "@mantine/core";
 import type { DashboardMetricValue, WorkerStatePayload } from "@/lib/dashboardTypes";
 import { compactNumber, currency, percent, wholeNumber } from "./formatters";
 
-export function MetricStrip({ state }: { state: WorkerStatePayload }) {
+type MetricStripProps = {
+  compact?: boolean;
+  state: WorkerStatePayload;
+};
+
+export function MetricStrip({ compact = false, state }: MetricStripProps) {
   const metrics = state.metrics;
   const scopedShare = metrics.totalRows ? metrics.filteredRows / metrics.totalRows : 0;
   const desktopColumns = Math.max(1, metrics.values.length);
 
   return (
-    <SimpleGrid component="section" cols={{ base: 2, lg: desktopColumns }} spacing="sm">
+    <SimpleGrid component="section" cols={{ base: 2, lg: desktopColumns }} spacing={compact ? 8 : "sm"}>
       {metrics.values.map((metric) => (
         <Metric
           key={metric.id}
+          compact={compact}
           label={metric.label}
           value={formatMetricValue(metric)}
           detail={getMetricDetail(metric, scopedShare)}
@@ -52,21 +58,22 @@ function getMetricDetail(metric: DashboardMetricValue, scopedShare: number) {
 }
 
 type MetricProps = {
+  compact: boolean;
   label: string;
   value: string;
   detail: string;
 };
 
-function Metric({ label, value, detail }: MetricProps) {
+function Metric({ compact, label, value, detail }: MetricProps) {
   return (
-    <Card component="article" withBorder shadow="xs" p="md" radius="md">
+    <Card component="article" withBorder shadow="xs" p={compact ? "xs" : "md"} radius="md">
       <Text size="xs" fw={700} tt="uppercase" c="dimmed">
         {label}
       </Text>
-      <Text mt={6} size="xl" fw={700} c="ink.9">
+      <Text mt={compact ? 2 : 6} size={compact ? "lg" : "xl"} fw={700} c="ink.9" lh={1.08}>
         {value}
       </Text>
-      <Text mt={2} size="sm" c="dimmed">
+      <Text mt={compact ? 0 : 2} size={compact ? "xs" : "sm"} c="dimmed">
         {detail}
       </Text>
     </Card>
