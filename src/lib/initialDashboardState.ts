@@ -110,17 +110,20 @@ function createInitialMetrics(
   measuredTotal: number,
 ): DashboardMetrics {
   const measure = config.dimensionMeasure ?? defaultDimensionMeasure;
-  const rowTotal = measure.kind === "count" ? measuredTotal : 0;
 
   return {
-    totalRows: rowTotal,
-    filteredRows: rowTotal,
+    totalRows: measuredTotal,
+    filteredRows: measuredTotal,
     values: config.metrics.flatMap((metric) => {
       const value =
         metric.kind === "count" && measure.kind === "count"
           ? measuredTotal
+          : metric.kind === "totalSum" && measure.kind === "sum" && metric.field === measure.field
+            ? measuredTotal
           : metric.kind === "sum" && measure.kind === "sum" && metric.field === measure.field
             ? measuredTotal
+            : metric.kind === "filteredPercent" && measure.kind === "sum" && metric.field === measure.field
+              ? measuredTotal ? 1 : 0
             : null;
 
       if (value === null) {

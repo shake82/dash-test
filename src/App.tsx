@@ -35,7 +35,7 @@ function App() {
       config={DEFAULT_DASHBOARD_CONFIG}
       dataUrl="/api/dashboard-data.json"
       jsonPath='.data'
-      // initialStateUrl="/api/dashboard-data-preview.json"
+      initialStateUrl="/api/dashboard-data-preview.json"
     />
   </MantineProvider>);
 }

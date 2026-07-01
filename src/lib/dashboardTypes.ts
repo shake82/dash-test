@@ -22,7 +22,7 @@ export type MetricFormat = "compact" | "currency" | "decimal" | "number" | "perc
 export type MetricConfig = {
   id: MetricId;
   label: string;
-  kind: "average" | "count" | "sum";
+  kind: "average" | "count" | "filteredPercent" | "sum" | "totalSum";
   field?: string;
   detail?: string;
   format?: MetricFormat;

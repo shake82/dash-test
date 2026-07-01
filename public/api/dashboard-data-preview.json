@@ -1,73 +1,4017 @@
 [
-  { "id": "region", "value": "Asia Pacific", "aggregate": 4167 },
-  { "id": "region", "value": "Europe", "aggregate": 4167 },
-  { "id": "region", "value": "Latin America", "aggregate": 4167 },
-  { "id": "region", "value": "Middle East", "aggregate": 4167 },
-  { "id": "region", "value": "Africa", "aggregate": 4166 },
-  { "id": "region", "value": "North America", "aggregate": 4166 },
-  { "id": "category", "value": "Collaboration", "aggregate": 4167 },
-  { "id": "category", "value": "Infrastructure", "aggregate": 4167 },
-  { "id": "category", "value": "Security", "aggregate": 4167 },
-  { "id": "category", "value": "Services", "aggregate": 4167 },
-  { "id": "category", "value": "Analytics", "aggregate": 4166 },
-  { "id": "category", "value": "Automation", "aggregate": 4166 },
-  { "id": "product", "value": "Delta", "aggregate": 1137 },
-  { "id": "product", "value": "Echo", "aggregate": 1137 },
-  { "id": "product", "value": "Juno", "aggregate": 1137 },
-  { "id": "product", "value": "Nova", "aggregate": 1137 },
-  { "id": "product", "value": "Orbit", "aggregate": 1137 },
-  { "id": "product", "value": "Relay", "aggregate": 1137 },
-  { "id": "product", "value": "Signal", "aggregate": 1137 },
-  { "id": "product", "value": "Zenith", "aggregate": 1137 },
-  { "id": "product", "value": "Atlas", "aggregate": 1136 },
-  { "id": "product", "value": "Beacon", "aggregate": 1136 },
-  { "id": "product", "value": "Compass", "aggregate": 1136 },
-  { "id": "product", "value": "Flux", "aggregate": 1136 },
-  { "id": "product", "value": "Helio", "aggregate": 1136 },
-  { "id": "product", "value": "Ion", "aggregate": 1136 },
-  { "id": "product", "value": "Keystone", "aggregate": 1136 },
-  { "id": "product", "value": "Lumen", "aggregate": 1136 },
-  { "id": "product", "value": "Matrix", "aggregate": 1136 },
-  { "id": "product", "value": "Pulse", "aggregate": 1136 },
-  { "id": "product", "value": "Quartz", "aggregate": 1136 },
-  { "id": "product", "value": "Terra", "aggregate": 1136 },
-  { "id": "product", "value": "Vector", "aggregate": 1136 },
-  { "id": "product", "value": "Wave", "aggregate": 1136 },
-  { "id": "channel", "value": "Direct", "aggregate": 25000 },
-  { "id": "segment", "value": "Enterprise", "aggregate": 5000 },
-  { "id": "segment", "value": "Mid-Market", "aggregate": 5000 },
-  { "id": "segment", "value": "Public Sector", "aggregate": 5000 },
-  { "id": "segment", "value": "Small Business", "aggregate": 5000 },
-  { "id": "segment", "value": "Strategic", "aggregate": 5000 },
-  { "id": "status", "value": "At Risk", "aggregate": 5000 },
-  { "id": "status", "value": "Expansion", "aggregate": 5000 },
-  { "id": "status", "value": "Renewal", "aggregate": 5000 },
-  { "id": "status", "value": "Trial", "aggregate": 5000 },
-  { "id": "status", "value": "Won", "aggregate": 5000 },
-  { "id": "quarter", "value": "2025 Q3", "aggregate": 4167 },
-  { "id": "quarter", "value": "2025 Q4", "aggregate": 4167 },
-  { "id": "quarter", "value": "2026 Q1", "aggregate": 4167 },
-  { "id": "quarter", "value": "2026 Q2", "aggregate": 4167 },
-  { "id": "quarter", "value": "2025 Q1", "aggregate": 4166 },
-  { "id": "quarter", "value": "2025 Q2", "aggregate": 4166 },
-  { "id": "owner", "value": "Avery Stone", "aggregate": 1250 },
-  { "id": "owner", "value": "Blair Kim", "aggregate": 1250 },
-  { "id": "owner", "value": "Casey Morgan", "aggregate": 1250 },
-  { "id": "owner", "value": "Dev Patel", "aggregate": 1250 },
-  { "id": "owner", "value": "Emery Singh", "aggregate": 1250 },
-  { "id": "owner", "value": "Finley Ross", "aggregate": 1250 },
-  { "id": "owner", "value": "Gray Chen", "aggregate": 1250 },
-  { "id": "owner", "value": "Harper Lee", "aggregate": 1250 },
-  { "id": "owner", "value": "Indigo Cruz", "aggregate": 1250 },
-  { "id": "owner", "value": "Jordan Reed", "aggregate": 1250 },
-  { "id": "owner", "value": "Kai Brooks", "aggregate": 1250 },
-  { "id": "owner", "value": "Logan Price", "aggregate": 1250 },
-  { "id": "owner", "value": "Morgan Bell", "aggregate": 1250 },
-  { "id": "owner", "value": "Nico Shah", "aggregate": 1250 },
-  { "id": "owner", "value": "Parker Wells", "aggregate": 1250 },
-  { "id": "owner", "value": "Quinn Fox", "aggregate": 1250 },
-  { "id": "owner", "value": "Riley Young", "aggregate": 1250 },
-  { "id": "owner", "value": "Sawyer Hayes", "aggregate": 1250 },
-  { "id": "owner", "value": "Taylor Lane", "aggregate": 1250 },
-  { "id": "owner", "value": "Val Ortiz", "aggregate": 1250 }
+  {
+    "id": "currentLocationCode",
+    "value": "NYC",
+    "aggregate": 197144
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "CHI",
+    "aggregate": 197070
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "HOU",
+    "aggregate": 197018
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "NBC",
+    "aggregate": 196944
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "FCO",
+    "aggregate": 196806
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "SRC",
+    "aggregate": 196732
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "IOE",
+    "aggregate": 196680
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "EAC",
+    "aggregate": 196606
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "DAL",
+    "aggregate": 195725
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "LAX",
+    "aggregate": 195489
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "SEA",
+    "aggregate": 195474
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "MSC",
+    "aggregate": 195313
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "ATL",
+    "aggregate": 195312
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "YSC",
+    "aggregate": 195151
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "WAC",
+    "aggregate": 195136
+  },
+  {
+    "id": "currentLocationCode",
+    "value": "LIN",
+    "aggregate": 194900
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "EAC",
+    "aggregate": 197144
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "IOE",
+    "aggregate": 197070
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "HOU",
+    "aggregate": 197018
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "NBC",
+    "aggregate": 196944
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "FCO",
+    "aggregate": 196806
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "SRC",
+    "aggregate": 196732
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "CHI",
+    "aggregate": 196680
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "NYC",
+    "aggregate": 196606
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "YSC",
+    "aggregate": 195725
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "MSC",
+    "aggregate": 195489
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "DAL",
+    "aggregate": 195474
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "WAC",
+    "aggregate": 195313
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "LAX",
+    "aggregate": 195312
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "LIN",
+    "aggregate": 195151
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "ATL",
+    "aggregate": 195136
+  },
+  {
+    "id": "fcoLocationCode",
+    "value": "SEA",
+    "aggregate": 194900
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "IOE",
+    "aggregate": 197144
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "EAC",
+    "aggregate": 197070
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "SRC",
+    "aggregate": 197018
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "NBC",
+    "aggregate": 196944
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "FCO",
+    "aggregate": 196806
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "HOU",
+    "aggregate": 196732
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "NYC",
+    "aggregate": 196680
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "CHI",
+    "aggregate": 196606
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "WAC",
+    "aggregate": 195725
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "LIN",
+    "aggregate": 195489
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "MSC",
+    "aggregate": 195474
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "SEA",
+    "aggregate": 195313
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "YSC",
+    "aggregate": 195312
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "ATL",
+    "aggregate": 195151
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "DAL",
+    "aggregate": 195136
+  },
+  {
+    "id": "adjudicationLocationCode",
+    "value": "LAX",
+    "aggregate": 194900
+  },
+  {
+    "id": "caseSubstatusCode",
+    "value": "1",
+    "aggregate": 393750
+  },
+  {
+    "id": "caseSubstatusCode",
+    "value": "3",
+    "aggregate": 393750
+  },
+  {
+    "id": "caseSubstatusCode",
+    "value": "5",
+    "aggregate": 393750
+  },
+  {
+    "id": "caseSubstatusCode",
+    "value": "7",
+    "aggregate": 393750
+  },
+  {
+    "id": "caseSubstatusCode",
+    "value": "2",
+    "aggregate": 390625
+  },
+  {
+    "id": "caseSubstatusCode",
+    "value": "4",
+    "aggregate": 390625
+  },
+  {
+    "id": "caseSubstatusCode",
+    "value": "6",
+    "aggregate": 390625
+  },
+  {
+    "id": "caseSubstatusCode",
+    "value": "8",
+    "aggregate": 390625
+  },
+  {
+    "id": "filingCategoryCode",
+    "value": "103",
+    "aggregate": 525346
+  },
+  {
+    "id": "filingCategoryCode",
+    "value": "101",
+    "aggregate": 524916
+  },
+  {
+    "id": "filingCategoryCode",
+    "value": "105",
+    "aggregate": 524738
+  },
+  {
+    "id": "filingCategoryCode",
+    "value": "106",
+    "aggregate": 521309
+  },
+  {
+    "id": "filingCategoryCode",
+    "value": "104",
+    "aggregate": 520917
+  },
+  {
+    "id": "filingCategoryCode",
+    "value": "102",
+    "aggregate": 520274
+  },
+  {
+    "id": "channelTypeCode",
+    "value": "20",
+    "aggregate": 637500
+  },
+  {
+    "id": "channelTypeCode",
+    "value": "10",
+    "aggregate": 632500
+  },
+  {
+    "id": "channelTypeCode",
+    "value": "50",
+    "aggregate": 627500
+  },
+  {
+    "id": "channelTypeCode",
+    "value": "40",
+    "aggregate": 622500
+  },
+  {
+    "id": "channelTypeCode",
+    "value": "30",
+    "aggregate": 617500
+  },
+  {
+    "id": "atNBC",
+    "value": "false",
+    "aggregate": 2090845
+  },
+  {
+    "id": "atNBC",
+    "value": "true",
+    "aggregate": 1046655
+  },
+  {
+    "id": "milnatzInd",
+    "value": "N",
+    "aggregate": 2520000
+  },
+  {
+    "id": "milnatzInd",
+    "value": "Y",
+    "aggregate": 617500
+  },
+  {
+    "id": "isRemoteInd",
+    "value": "N",
+    "aggregate": 2356250
+  },
+  {
+    "id": "isRemoteInd",
+    "value": "Y",
+    "aggregate": 781250
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-12",
+    "aggregate": 5230
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-08",
+    "aggregate": 5195
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-05",
+    "aggregate": 5165
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-06",
+    "aggregate": 5160
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-06",
+    "aggregate": 5140
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-13",
+    "aggregate": 5140
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-18",
+    "aggregate": 5140
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-01",
+    "aggregate": 5130
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-02",
+    "aggregate": 5125
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-02",
+    "aggregate": 5106
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-09",
+    "aggregate": 5106
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-15",
+    "aggregate": 5106
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-28",
+    "aggregate": 5095
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-29",
+    "aggregate": 5090
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-29",
+    "aggregate": 5072
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-06",
+    "aggregate": 5072
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-25",
+    "aggregate": 5065
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-26",
+    "aggregate": 5060
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-26",
+    "aggregate": 5055
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-26",
+    "aggregate": 5050
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-02",
+    "aggregate": 5050
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-08",
+    "aggregate": 5050
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-19",
+    "aggregate": 5045
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-25",
+    "aggregate": 5038
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-02",
+    "aggregate": 5038
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-21",
+    "aggregate": 5030
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-22",
+    "aggregate": 5025
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-22",
+    "aggregate": 5020
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-22",
+    "aggregate": 5016
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-29",
+    "aggregate": 5016
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-15",
+    "aggregate": 5010
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-22",
+    "aggregate": 5004
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-29",
+    "aggregate": 5004
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-18",
+    "aggregate": 5000
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-16",
+    "aggregate": 5000
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-19",
+    "aggregate": 4995
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-19",
+    "aggregate": 4990
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-18",
+    "aggregate": 4982
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-26",
+    "aggregate": 4982
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-21",
+    "aggregate": 4980
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-29",
+    "aggregate": 4980
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-13",
+    "aggregate": 4975
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-18",
+    "aggregate": 4970
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-26",
+    "aggregate": 4970
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-14",
+    "aggregate": 4965
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-15",
+    "aggregate": 4960
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-15",
+    "aggregate": 4960
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-22",
+    "aggregate": 4960
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-28",
+    "aggregate": 4960
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-15",
+    "aggregate": 4955
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-15",
+    "aggregate": 4948
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-22",
+    "aggregate": 4948
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-13",
+    "aggregate": 4946
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-20",
+    "aggregate": 4946
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-25",
+    "aggregate": 4946
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-09",
+    "aggregate": 4940
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-15",
+    "aggregate": 4936
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-22",
+    "aggregate": 4936
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-12",
+    "aggregate": 4930
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-11",
+    "aggregate": 4926
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-19",
+    "aggregate": 4926
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-12",
+    "aggregate": 4925
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-11",
+    "aggregate": 4914
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-19",
+    "aggregate": 4914
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-09",
+    "aggregate": 4912
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-16",
+    "aggregate": 4912
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-22",
+    "aggregate": 4912
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-06",
+    "aggregate": 4905
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-11",
+    "aggregate": 4902
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-18",
+    "aggregate": 4902
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-07",
+    "aggregate": 4900
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-08",
+    "aggregate": 4895
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-08",
+    "aggregate": 4892
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-15",
+    "aggregate": 4892
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-08",
+    "aggregate": 4890
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-08",
+    "aggregate": 4880
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-15",
+    "aggregate": 4880
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-05",
+    "aggregate": 4878
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-13",
+    "aggregate": 4878
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-02",
+    "aggregate": 4870
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-04",
+    "aggregate": 4870
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-12",
+    "aggregate": 4870
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-07",
+    "aggregate": 4868
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-15",
+    "aggregate": 4868
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-05",
+    "aggregate": 4865
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-26",
+    "aggregate": 4860
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-05",
+    "aggregate": 4860
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-04",
+    "aggregate": 4858
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-12",
+    "aggregate": 4858
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-27",
+    "aggregate": 4850
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-04",
+    "aggregate": 4846
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-11",
+    "aggregate": 4846
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-02",
+    "aggregate": 4844
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-09",
+    "aggregate": 4844
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-01",
+    "aggregate": 4836
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-08",
+    "aggregate": 4836
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-29",
+    "aggregate": 4834
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-06",
+    "aggregate": 4834
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-11",
+    "aggregate": 4834
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-01",
+    "aggregate": 4830
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-22",
+    "aggregate": 4825
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-01",
+    "aggregate": 4825
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-01",
+    "aggregate": 4824
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-08",
+    "aggregate": 4824
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-01",
+    "aggregate": 4820
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-09",
+    "aggregate": 4820
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-23",
+    "aggregate": 4815
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-31",
+    "aggregate": 4812
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-08",
+    "aggregate": 4812
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-29",
+    "aggregate": 4810
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-06",
+    "aggregate": 4810
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-28",
+    "aggregate": 4802
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-05",
+    "aggregate": 4802
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-27",
+    "aggregate": 4800
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-28",
+    "aggregate": 4795
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-20",
+    "aggregate": 4790
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-28",
+    "aggregate": 4790
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-28",
+    "aggregate": 4790
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-04",
+    "aggregate": 4790
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-28",
+    "aggregate": 4786
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-05",
+    "aggregate": 4786
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-24",
+    "aggregate": 4780
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-01",
+    "aggregate": 4780
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-27",
+    "aggregate": 4778
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-04",
+    "aggregate": 4778
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-25",
+    "aggregate": 4776
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-02",
+    "aggregate": 4776
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-24",
+    "aggregate": 4768
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-01",
+    "aggregate": 4768
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-25",
+    "aggregate": 4765
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-25",
+    "aggregate": 4760
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-24",
+    "aggregate": 4756
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-01",
+    "aggregate": 4756
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-16",
+    "aggregate": 4755
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-20",
+    "aggregate": 4752
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-27",
+    "aggregate": 4752
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-02",
+    "aggregate": 4752
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-21",
+    "aggregate": 4746
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-28",
+    "aggregate": 4746
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-19",
+    "aggregate": 4744
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-26",
+    "aggregate": 4744
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-01",
+    "aggregate": 4744
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-22",
+    "aggregate": 4742
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-29",
+    "aggregate": 4742
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-21",
+    "aggregate": 4734
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-28",
+    "aggregate": 4734
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-21",
+    "aggregate": 4730
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-21",
+    "aggregate": 4725
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-20",
+    "aggregate": 4722
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-28",
+    "aggregate": 4722
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-13",
+    "aggregate": 4720
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-16",
+    "aggregate": 4718
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-23",
+    "aggregate": 4718
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-29",
+    "aggregate": 4718
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-17",
+    "aggregate": 4712
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-25",
+    "aggregate": 4712
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-06",
+    "aggregate": 4710
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-18",
+    "aggregate": 4708
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-25",
+    "aggregate": 4708
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-18",
+    "aggregate": 4700
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-07",
+    "aggregate": 4700
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-17",
+    "aggregate": 4700
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-24",
+    "aggregate": 4700
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-18",
+    "aggregate": 4695
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-14",
+    "aggregate": 4690
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-21",
+    "aggregate": 4690
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-12",
+    "aggregate": 4688
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-19",
+    "aggregate": 4688
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-24",
+    "aggregate": 4688
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-11",
+    "aggregate": 4685
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-09",
+    "aggregate": 4685
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-12",
+    "aggregate": 4684
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-20",
+    "aggregate": 4684
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-14",
+    "aggregate": 4678
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-21",
+    "aggregate": 4678
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-02",
+    "aggregate": 4675
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-14",
+    "aggregate": 4674
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-22",
+    "aggregate": 4674
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-13",
+    "aggregate": 4666
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-21",
+    "aggregate": 4666
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-14",
+    "aggregate": 4665
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-03",
+    "aggregate": 4665
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-14",
+    "aggregate": 4660
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-12",
+    "aggregate": 4660
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-19",
+    "aggregate": 4660
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-10",
+    "aggregate": 4656
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-18",
+    "aggregate": 4656
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-08",
+    "aggregate": 4654
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-15",
+    "aggregate": 4654
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-21",
+    "aggregate": 4654
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-09",
+    "aggregate": 4650
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-16",
+    "aggregate": 4650
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-10",
+    "aggregate": 4644
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-17",
+    "aggregate": 4644
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-29",
+    "aggregate": 4640
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-05",
+    "aggregate": 4632
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-12",
+    "aggregate": 4632
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-17",
+    "aggregate": 4632
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-11",
+    "aggregate": 4630
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-08",
+    "aggregate": 4626
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-16",
+    "aggregate": 4626
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-07",
+    "aggregate": 4622
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-14",
+    "aggregate": 4622
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-04",
+    "aggregate": 4620
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-05",
+    "aggregate": 4616
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-13",
+    "aggregate": 4616
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-06",
+    "aggregate": 4610
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-14",
+    "aggregate": 4610
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-27",
+    "aggregate": 4605
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-07",
+    "aggregate": 4600
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-03",
+    "aggregate": 4600
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-11",
+    "aggregate": 4600
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-01",
+    "aggregate": 4598
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-08",
+    "aggregate": 4598
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-14",
+    "aggregate": 4598
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-07",
+    "aggregate": 4595
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-30",
+    "aggregate": 4592
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-07",
+    "aggregate": 4592
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-12",
+    "aggregate": 4592
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-03",
+    "aggregate": 4588
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-10",
+    "aggregate": 4588
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-31",
+    "aggregate": 4585
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-02",
+    "aggregate": 4582
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-09",
+    "aggregate": 4582
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-05",
+    "aggregate": 4576
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-10",
+    "aggregate": 4576
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-23",
+    "aggregate": 4570
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-30",
+    "aggregate": 4566
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-07",
+    "aggregate": 4566
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-04",
+    "aggregate": 4565
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-28",
+    "aggregate": 4564
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-05",
+    "aggregate": 4564
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-27",
+    "aggregate": 4558
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-03",
+    "aggregate": 4558
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-09",
+    "aggregate": 4558
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-30",
+    "aggregate": 4554
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-07",
+    "aggregate": 4554
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-17",
+    "aggregate": 4550
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-29",
+    "aggregate": 4548
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-05",
+    "aggregate": 4548
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-25",
+    "aggregate": 4542
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-01",
+    "aggregate": 4542
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-07",
+    "aggregate": 4542
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-20",
+    "aggregate": 4535
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-27",
+    "aggregate": 4532
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-03",
+    "aggregate": 4532
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-31",
+    "aggregate": 4530
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-13",
+    "aggregate": 4525
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-23",
+    "aggregate": 4524
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-30",
+    "aggregate": 4524
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-24",
+    "aggregate": 4520
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-26",
+    "aggregate": 4520
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-03",
+    "aggregate": 4520
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-14",
+    "aggregate": 4515
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-25",
+    "aggregate": 4514
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-02",
+    "aggregate": 4514
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-23",
+    "aggregate": 4510
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-31",
+    "aggregate": 4510
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-21",
+    "aggregate": 4508
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-28",
+    "aggregate": 4508
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-27",
+    "aggregate": 4500
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-23",
+    "aggregate": 4500
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-30",
+    "aggregate": 4500
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-23",
+    "aggregate": 4498
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-30",
+    "aggregate": 4498
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-27",
+    "aggregate": 4495
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-09",
+    "aggregate": 4490
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-19",
+    "aggregate": 4490
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-27",
+    "aggregate": 4490
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-18",
+    "aggregate": 4486
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-25",
+    "aggregate": 4486
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-30",
+    "aggregate": 4486
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-20",
+    "aggregate": 4485
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-10",
+    "aggregate": 4480
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-20",
+    "aggregate": 4476
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-27",
+    "aggregate": 4476
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-17",
+    "aggregate": 4474
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-25",
+    "aggregate": 4474
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-19",
+    "aggregate": 4466
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-26",
+    "aggregate": 4466
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-24",
+    "aggregate": 4465
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-19",
+    "aggregate": 4464
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-27",
+    "aggregate": 4464
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-16",
+    "aggregate": 4456
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-23",
+    "aggregate": 4456
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-17",
+    "aggregate": 4455
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-07",
+    "aggregate": 4455
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-14",
+    "aggregate": 4452
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-21",
+    "aggregate": 4452
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-27",
+    "aggregate": 4452
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-16",
+    "aggregate": 4442
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-23",
+    "aggregate": 4442
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-15",
+    "aggregate": 4432
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-23",
+    "aggregate": 4432
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-20",
+    "aggregate": 4430
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-11",
+    "aggregate": 4430
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-18",
+    "aggregate": 4430
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-23",
+    "aggregate": 4430
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-12",
+    "aggregate": 4422
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-20",
+    "aggregate": 4422
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-13",
+    "aggregate": 4420
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-03",
+    "aggregate": 4420
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-13",
+    "aggregate": 4420
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-20",
+    "aggregate": 4420
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-10",
+    "aggregate": 4418
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-18",
+    "aggregate": 4418
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-12",
+    "aggregate": 4408
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-20",
+    "aggregate": 4408
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-28",
+    "aggregate": 4400
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-17",
+    "aggregate": 4400
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-07",
+    "aggregate": 4398
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-14",
+    "aggregate": 4398
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-19",
+    "aggregate": 4398
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-07",
+    "aggregate": 4396
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-14",
+    "aggregate": 4396
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-20",
+    "aggregate": 4396
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-10",
+    "aggregate": 4390
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-09",
+    "aggregate": 4388
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-16",
+    "aggregate": 4388
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-09",
+    "aggregate": 4386
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-16",
+    "aggregate": 4386
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-11",
+    "aggregate": 4385
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-30",
+    "aggregate": 4385
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-07",
+    "aggregate": 4384
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-14",
+    "aggregate": 4384
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-04",
+    "aggregate": 4374
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-11",
+    "aggregate": 4374
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-16",
+    "aggregate": 4374
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-24",
+    "aggregate": 4365
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-13",
+    "aggregate": 4365
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-03",
+    "aggregate": 4364
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-10",
+    "aggregate": 4364
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-16",
+    "aggregate": 4364
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-03",
+    "aggregate": 4362
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-11",
+    "aggregate": 4362
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-06",
+    "aggregate": 4355
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-05",
+    "aggregate": 4354
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-12",
+    "aggregate": 4354
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-05",
+    "aggregate": 4352
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-13",
+    "aggregate": 4352
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-20",
+    "aggregate": 4340
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-31",
+    "aggregate": 4340
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-03",
+    "aggregate": 4340
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-07",
+    "aggregate": 4340
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-10",
+    "aggregate": 4340
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-13",
+    "aggregate": 4340
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-21",
+    "aggregate": 4330
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-30",
+    "aggregate": 4330
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-02",
+    "aggregate": 4330
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-07",
+    "aggregate": 4330
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-09",
+    "aggregate": 4330
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-30",
+    "aggregate": 4328
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-07",
+    "aggregate": 4328
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-03",
+    "aggregate": 4325
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-04",
+    "aggregate": 4320
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-04",
+    "aggregate": 4318
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-09",
+    "aggregate": 4318
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-27",
+    "aggregate": 4306
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-30",
+    "aggregate": 4306
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-04",
+    "aggregate": 4306
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-06",
+    "aggregate": 4306
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-16",
+    "aggregate": 4305
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-06",
+    "aggregate": 4300
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-26",
+    "aggregate": 4296
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-29",
+    "aggregate": 4296
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-03",
+    "aggregate": 4296
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-06",
+    "aggregate": 4296
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-17",
+    "aggregate": 4295
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-27",
+    "aggregate": 4294
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-04",
+    "aggregate": 4294
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-30",
+    "aggregate": 4290
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-31",
+    "aggregate": 4285
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-24",
+    "aggregate": 4284
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-31",
+    "aggregate": 4284
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-06",
+    "aggregate": 4284
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-23",
+    "aggregate": 4272
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-26",
+    "aggregate": 4272
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-31",
+    "aggregate": 4272
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-03",
+    "aggregate": 4272
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-14",
+    "aggregate": 4270
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-23",
+    "aggregate": 4262
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-25",
+    "aggregate": 4262
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-30",
+    "aggregate": 4262
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-02",
+    "aggregate": 4262
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-26",
+    "aggregate": 4255
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-08",
+    "aggregate": 4250
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-20",
+    "aggregate": 4250
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-27",
+    "aggregate": 4250
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-22",
+    "aggregate": 4240
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-29",
+    "aggregate": 4240
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-20",
+    "aggregate": 4238
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-22",
+    "aggregate": 4238
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-27",
+    "aggregate": 4238
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-30",
+    "aggregate": 4238
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-10",
+    "aggregate": 4235
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-17",
+    "aggregate": 4228
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-19",
+    "aggregate": 4228
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-24",
+    "aggregate": 4228
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-27",
+    "aggregate": 4228
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-29",
+    "aggregate": 4228
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-23",
+    "aggregate": 4225
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-24",
+    "aggregate": 4220
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-16",
+    "aggregate": 4216
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-24",
+    "aggregate": 4216
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-04",
+    "aggregate": 4215
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-18",
+    "aggregate": 4206
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-26",
+    "aggregate": 4206
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-14",
+    "aggregate": 4204
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-16",
+    "aggregate": 4204
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-21",
+    "aggregate": 4204
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-24",
+    "aggregate": 4204
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-26",
+    "aggregate": 4204
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-26",
+    "aggregate": 4200
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-13",
+    "aggregate": 4194
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-16",
+    "aggregate": 4194
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-20",
+    "aggregate": 4194
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-23",
+    "aggregate": 4194
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-26",
+    "aggregate": 4194
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-19",
+    "aggregate": 4190
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-20",
+    "aggregate": 4185
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-13",
+    "aggregate": 4182
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-20",
+    "aggregate": 4182
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-01",
+    "aggregate": 4180
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-13",
+    "aggregate": 4180
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-21",
+    "aggregate": 4180
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-10",
+    "aggregate": 4172
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-17",
+    "aggregate": 4172
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-22",
+    "aggregate": 4172
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-10",
+    "aggregate": 4170
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-17",
+    "aggregate": 4170
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-23",
+    "aggregate": 4170
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-16",
+    "aggregate": 4160
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-09",
+    "aggregate": 4160
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-17",
+    "aggregate": 4160
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-27",
+    "aggregate": 4155
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-17",
+    "aggregate": 4155
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-11",
+    "aggregate": 4150
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-19",
+    "aggregate": 4150
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-09",
+    "aggregate": 4148
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-17",
+    "aggregate": 4148
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-10",
+    "aggregate": 4146
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-17",
+    "aggregate": 4146
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-28",
+    "aggregate": 4145
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-06",
+    "aggregate": 4138
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-13",
+    "aggregate": 4138
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-19",
+    "aggregate": 4138
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-06",
+    "aggregate": 4136
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-14",
+    "aggregate": 4136
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-06",
+    "aggregate": 4126
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-13",
+    "aggregate": 4126
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-12",
+    "aggregate": 4125
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-23",
+    "aggregate": 4120
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-13",
+    "aggregate": 4120
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-03",
+    "aggregate": 4116
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-10",
+    "aggregate": 4116
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-15",
+    "aggregate": 4116
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-06",
+    "aggregate": 4114
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-13",
+    "aggregate": 4114
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-06",
+    "aggregate": 4112
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-13",
+    "aggregate": 4112
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-24",
+    "aggregate": 4110
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-02",
+    "aggregate": 4104
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-10",
+    "aggregate": 4104
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-03",
+    "aggregate": 4102
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-10",
+    "aggregate": 4102
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-17",
+    "aggregate": 4100
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-09",
+    "aggregate": 4095
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-02",
+    "aggregate": 4092
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-10",
+    "aggregate": 4092
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-10",
+    "aggregate": 4090
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-21",
+    "aggregate": 4085
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-10",
+    "aggregate": 4085
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-30",
+    "aggregate": 4082
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-06",
+    "aggregate": 4082
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-12",
+    "aggregate": 4082
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-02",
+    "aggregate": 4078
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-10",
+    "aggregate": 4078
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-29",
+    "aggregate": 4070
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-06",
+    "aggregate": 4070
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-30",
+    "aggregate": 4068
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-07",
+    "aggregate": 4068
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-15",
+    "aggregate": 4065
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-05",
+    "aggregate": 4060
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-03",
+    "aggregate": 4060
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-08",
+    "aggregate": 4060
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-29",
+    "aggregate": 4058
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-06",
+    "aggregate": 4058
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-06",
+    "aggregate": 4055
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-26",
+    "aggregate": 4048
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-03",
+    "aggregate": 4048
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-01",
+    "aggregate": 4044
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-06",
+    "aggregate": 4044
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-26",
+    "aggregate": 4036
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-03",
+    "aggregate": 4036
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-26",
+    "aggregate": 4034
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-03",
+    "aggregate": 4034
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-02",
+    "aggregate": 4030
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-11",
+    "aggregate": 4030
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-23",
+    "aggregate": 4026
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-30",
+    "aggregate": 4026
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-05",
+    "aggregate": 4026
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-03",
+    "aggregate": 4025
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-26",
+    "aggregate": 4024
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-02",
+    "aggregate": 4024
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-03",
+    "aggregate": 4020
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-24",
+    "aggregate": 4020
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-01",
+    "aggregate": 4020
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-22",
+    "aggregate": 4014
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-30",
+    "aggregate": 4014
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-21",
+    "aggregate": 4010
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-28",
+    "aggregate": 4010
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-03",
+    "aggregate": 4010
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-07",
+    "aggregate": 4005
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-22",
+    "aggregate": 4002
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-30",
+    "aggregate": 4002
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-29",
+    "aggregate": 3995
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-08",
+    "aggregate": 3995
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-19",
+    "aggregate": 3992
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-26",
+    "aggregate": 3992
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-30",
+    "aggregate": 3990
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-20",
+    "aggregate": 3986
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-28",
+    "aggregate": 3986
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-30",
+    "aggregate": 3985
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-19",
+    "aggregate": 3980
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-26",
+    "aggregate": 3980
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-17",
+    "aggregate": 3976
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-24",
+    "aggregate": 3976
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-30",
+    "aggregate": 3976
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-03",
+    "aggregate": 3970
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-16",
+    "aggregate": 3970
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-23",
+    "aggregate": 3970
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-28",
+    "aggregate": 3970
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-19",
+    "aggregate": 3968
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-26",
+    "aggregate": 3968
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-25",
+    "aggregate": 3960
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-04",
+    "aggregate": 3960
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-15",
+    "aggregate": 3958
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-23",
+    "aggregate": 3958
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-26",
+    "aggregate": 3955
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-17",
+    "aggregate": 3952
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-24",
+    "aggregate": 3952
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-28",
+    "aggregate": 3950
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-15",
+    "aggregate": 3946
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-23",
+    "aggregate": 3946
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-13",
+    "aggregate": 3942
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-21",
+    "aggregate": 3942
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-12",
+    "aggregate": 3936
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-19",
+    "aggregate": 3936
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-25",
+    "aggregate": 3936
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-01",
+    "aggregate": 3935
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-15",
+    "aggregate": 3934
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-22",
+    "aggregate": 3934
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-22",
+    "aggregate": 3930
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-23",
+    "aggregate": 3925
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-12",
+    "aggregate": 3924
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-19",
+    "aggregate": 3924
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-23",
+    "aggregate": 3920
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-13",
+    "aggregate": 3918
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-20",
+    "aggregate": 3918
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-24",
+    "aggregate": 3915
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-12",
+    "aggregate": 3912
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-19",
+    "aggregate": 3912
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-10",
+    "aggregate": 3908
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-17",
+    "aggregate": 3908
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-08",
+    "aggregate": 3902
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-16",
+    "aggregate": 3902
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-18",
+    "aggregate": 3895
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-19",
+    "aggregate": 3890
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-08",
+    "aggregate": 3890
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-16",
+    "aggregate": 3890
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-19",
+    "aggregate": 3885
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-09",
+    "aggregate": 3884
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-17",
+    "aggregate": 3884
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-22",
+    "aggregate": 3880
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-05",
+    "aggregate": 3880
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-12",
+    "aggregate": 3880
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-18",
+    "aggregate": 3880
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-08",
+    "aggregate": 3878
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-15",
+    "aggregate": 3878
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-06",
+    "aggregate": 3874
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-14",
+    "aggregate": 3874
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-05",
+    "aggregate": 3868
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-12",
+    "aggregate": 3868
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-15",
+    "aggregate": 3865
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-16",
+    "aggregate": 3860
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-04",
+    "aggregate": 3860
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-11",
+    "aggregate": 3860
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-05",
+    "aggregate": 3856
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-12",
+    "aggregate": 3856
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-16",
+    "aggregate": 3855
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-01",
+    "aggregate": 3850
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-08",
+    "aggregate": 3850
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-13",
+    "aggregate": 3850
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-01",
+    "aggregate": 3846
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-09",
+    "aggregate": 3846
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-18",
+    "aggregate": 3845
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-04",
+    "aggregate": 3844
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-12",
+    "aggregate": 3844
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-01",
+    "aggregate": 3834
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-09",
+    "aggregate": 3834
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-11",
+    "aggregate": 3830
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-31",
+    "aggregate": 3826
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-08",
+    "aggregate": 3826
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-12",
+    "aggregate": 3825
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-01",
+    "aggregate": 3822
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-08",
+    "aggregate": 3822
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-14",
+    "aggregate": 3820
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-12",
+    "aggregate": 3820
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-28",
+    "aggregate": 3816
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-04",
+    "aggregate": 3816
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-10",
+    "aggregate": 3816
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-28",
+    "aggregate": 3812
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-05",
+    "aggregate": 3812
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-15",
+    "aggregate": 3810
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-08",
+    "aggregate": 3800
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-28",
+    "aggregate": 3800
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-05",
+    "aggregate": 3800
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-09",
+    "aggregate": 3795
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-27",
+    "aggregate": 3792
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-04",
+    "aggregate": 3792
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-09",
+    "aggregate": 3790
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-25",
+    "aggregate": 3790
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-02",
+    "aggregate": 3790
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-28",
+    "aggregate": 3788
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-05",
+    "aggregate": 3788
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-10",
+    "aggregate": 3785
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-24",
+    "aggregate": 3782
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-01",
+    "aggregate": 3782
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-25",
+    "aggregate": 3778
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-02",
+    "aggregate": 3778
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-11",
+    "aggregate": 3775
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-25",
+    "aggregate": 3766
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-01",
+    "aggregate": 3766
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-02-04",
+    "aggregate": 3765
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-05",
+    "aggregate": 3760
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-24",
+    "aggregate": 3758
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-31",
+    "aggregate": 3758
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-21",
+    "aggregate": 3756
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-29",
+    "aggregate": 3756
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-05",
+    "aggregate": 3755
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-24",
+    "aggregate": 3754
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-01",
+    "aggregate": 3754
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-20",
+    "aggregate": 3748
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-28",
+    "aggregate": 3748
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-21",
+    "aggregate": 3744
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-29",
+    "aggregate": 3744
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-21",
+    "aggregate": 3732
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-28",
+    "aggregate": 3732
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-02",
+    "aggregate": 3730
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-02",
+    "aggregate": 3725
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-20",
+    "aggregate": 3724
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-27",
+    "aggregate": 3724
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-18",
+    "aggregate": 3722
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-25",
+    "aggregate": 3722
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-17",
+    "aggregate": 3714
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-24",
+    "aggregate": 3714
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-18",
+    "aggregate": 3710
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-25",
+    "aggregate": 3710
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-14",
+    "aggregate": 3700
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-22",
+    "aggregate": 3700
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-17",
+    "aggregate": 3698
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-25",
+    "aggregate": 3698
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-03-29",
+    "aggregate": 3695
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-29",
+    "aggregate": 3690
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-16",
+    "aggregate": 3690
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-24",
+    "aggregate": 3690
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-14",
+    "aggregate": 3688
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-22",
+    "aggregate": 3688
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-14",
+    "aggregate": 3676
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-21",
+    "aggregate": 3676
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-10-11",
+    "aggregate": 3666
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-18",
+    "aggregate": 3666
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-09",
+    "aggregate": 3664
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-16",
+    "aggregate": 3664
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-21",
+    "aggregate": 3664
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-04-25",
+    "aggregate": 3660
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-08",
+    "aggregate": 3656
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-15",
+    "aggregate": 3656
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-20",
+    "aggregate": 3656
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-25",
+    "aggregate": 3655
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-11",
+    "aggregate": 3654
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-18",
+    "aggregate": 3654
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-10",
+    "aggregate": 3642
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-18",
+    "aggregate": 3642
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-21",
+    "aggregate": 3635
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-11-07",
+    "aggregate": 3632
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-07-15",
+    "aggregate": 3632
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-05-22",
+    "aggregate": 3625
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-04",
+    "aggregate": 3622
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-11",
+    "aggregate": 3622
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-17",
+    "aggregate": 3622
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-07",
+    "aggregate": 3620
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-14",
+    "aggregate": 3620
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-02",
+    "aggregate": 3608
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-09",
+    "aggregate": 3608
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-14",
+    "aggregate": 3608
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-04",
+    "aggregate": 3598
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-08-11",
+    "aggregate": 3598
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-06-18",
+    "aggregate": 3590
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-31",
+    "aggregate": 3588
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-08",
+    "aggregate": 3588
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-03",
+    "aggregate": 3586
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-11",
+    "aggregate": 3586
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-29",
+    "aggregate": 3574
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-05",
+    "aggregate": 3574
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-11",
+    "aggregate": 3574
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-12-31",
+    "aggregate": 3564
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-09-07",
+    "aggregate": 3564
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-27",
+    "aggregate": 3554
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-06-04",
+    "aggregate": 3554
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-02",
+    "aggregate": 3552
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-07",
+    "aggregate": 3552
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-01-27",
+    "aggregate": 3530
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-04",
+    "aggregate": 3530
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-22",
+    "aggregate": 3518
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-29",
+    "aggregate": 3518
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-04",
+    "aggregate": 3518
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-02-23",
+    "aggregate": 3496
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-10-31",
+    "aggregate": 3496
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-01-01",
+    "aggregate": 3485
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-18",
+    "aggregate": 3484
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-25",
+    "aggregate": 3484
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-07-15",
+    "aggregate": 3462
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-03-22",
+    "aggregate": 3462
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-11-27",
+    "aggregate": 3462
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-08-11",
+    "aggregate": 3428
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-04-18",
+    "aggregate": 3428
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-12-24",
+    "aggregate": 3428
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2024-09-07",
+    "aggregate": 3394
+  },
+  {
+    "id": "uscisReceiptDate",
+    "value": "2025-05-15",
+    "aggregate": 3394
+  }
 ]

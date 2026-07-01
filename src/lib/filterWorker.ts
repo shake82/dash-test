@@ -32,6 +32,7 @@ const LOOKUP_URL = "/api/lookup.json";
 let cf: crossfilter.Crossfilter<DataRow> | null = null;
 let handles = new Map<DimensionId, DimensionHandle>();
 let metricGroup: crossfilter.GroupAll<DataRow, MetricAccumulator> | null = null;
+let totalMetricValues: Record<string, number> = {};
 let totalRows = 0;
 let currentConfig: SerializableDashboardConfig = { dimensions: [], metrics: [] };
 let lookupMap: LookupMap = {};
@@ -307,10 +308,30 @@ const createMetricAccumulator = (): MetricAccumulator => ({
   count: 0,
   sums: Object.fromEntries(
     currentConfig.metrics
-      .filter((metric) => metric.kind !== "count")
+      .filter((metric) => metric.kind !== "count" && metric.kind !== "totalSum")
       .map((metric) => [metric.id, 0]),
   ),
 });
+
+const createTotalMetricValues = (rows: DataRow[]) => {
+  return Object.fromEntries(
+    currentConfig.metrics.map((metric) => {
+      if (metric.kind === "count") {
+        return [metric.id, rows.length];
+      }
+
+      if (metric.kind === "average") {
+        const total = rows.reduce((sum, row) => sum + numberForMetric(row, metric.field), 0);
+        return [metric.id, rows.length ? total / rows.length : 0];
+      }
+
+      return [
+        metric.id,
+        rows.reduce((sum, row) => sum + numberForMetric(row, metric.field), 0),
+      ];
+    }),
+  );
+};
 
 const updateMetricAccumulator = (
   state: MetricAccumulator,
@@ -320,7 +341,7 @@ const updateMetricAccumulator = (
   const sums = { ...state.sums };
 
   for (const metric of currentConfig.metrics) {
-    if (metric.kind === "count") {
+    if (metric.kind === "count" || metric.kind === "totalSum") {
       continue;
     }
 
@@ -338,6 +359,7 @@ const initializeCrossfilter = (rows: DataRow[], config: SerializableDashboardCon
   handles = new Map();
   totalRows = rows.length;
   currentConfig = config;
+  totalMetricValues = createTotalMetricValues(rows);
   cf = crossfilter(rows);
 
   for (const config of currentConfig.dimensions) {
@@ -420,11 +442,17 @@ const getMetrics = (): DashboardMetrics => {
       const metricValue =
         metric.kind === "count"
           ? value.count
-          : metric.kind === "average"
-            ? value.count
-              ? (value.sums[metric.id] ?? 0) / value.count
-              : 0
-            : value.sums[metric.id] ?? 0;
+          : metric.kind === "totalSum"
+            ? totalMetricValues[metric.id] ?? 0
+            : metric.kind === "filteredPercent"
+              ? totalMetricValues[metric.id]
+                ? (value.sums[metric.id] ?? 0) / totalMetricValues[metric.id]
+                : 0
+              : metric.kind === "average"
+                ? value.count
+                  ? (value.sums[metric.id] ?? 0) / value.count
+                  : 0
+                : value.sums[metric.id] ?? 0;
 
       return {
         ...metric,
