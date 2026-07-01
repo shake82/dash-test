@@ -8,13 +8,19 @@ export type DimensionLookup =
   | Record<string, string>
   | ((value: string) => string | null | undefined);
 
+export type ChartType = "area" | "bar" | "pie";
+
 export type DimensionConfig = {
   id: DimensionId;
   label: string;
   field?: string;
+  aggregation?: "month";
+  chartType?: ChartType;
+  labelFormat?: "mm-yyyy";
   lookup?: DimensionLookup;
   maxVisibleItems: number;
   pieThreshold: number;
+  sort?: "aggregateDesc" | "dateAsc";
 };
 
 export type MetricFormat = "compact" | "currency" | "decimal" | "number" | "percent";
@@ -74,7 +80,7 @@ export type ChartDatum = {
 };
 
 export type DimensionSummary = DimensionConfig & {
-  chartType: "bar" | "pie";
+  chartType: ChartType;
   cardinality: number;
   visibleCount: number;
   hiddenCount: number;

@@ -12,7 +12,16 @@ export const DIMENSIONS: DimensionConfig[] = [
   { id: "atNBC", label: "At NBC", maxVisibleItems: 2, pieThreshold: 7 ,lookup: yesNLookup },
   { id: "milnatzInd", label: "MILNATZ Indicator", maxVisibleItems: 2, pieThreshold: 7 ,lookup: yesNLookup },
   { id: "isRemoteInd", label: "Remote Indicator", maxVisibleItems: 2, pieThreshold: 7, lookup: yesNLookup  },
-  { id: "uscisReceiptDate", label: "USCIS Receipt Date", maxVisibleItems: 12, pieThreshold: 8 },
+  {
+    id: "uscisReceiptDate",
+    label: "USCIS Receipt Date",
+    aggregation: "month",
+    chartType: "area",
+    labelFormat: "mm-yyyy",
+    maxVisibleItems: 12,
+    pieThreshold: 8,
+    sort: "dateAsc",
+  },
 ];
 
 export const DEFAULT_DASHBOARD_CONFIG: DashboardConfig = {

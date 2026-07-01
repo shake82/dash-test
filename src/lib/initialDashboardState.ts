@@ -1,5 +1,6 @@
 import type {
   ChartDatum,
+  ChartType,
   DashboardConfig,
   DashboardMetrics,
   DimensionConfig,
@@ -73,17 +74,15 @@ function createDimensionSummary(
       continue;
     }
 
-    valueByKey.set(row.value, (valueByKey.get(row.value) ?? 0) + row.aggregate);
+    const key = valueForDimensionAggregate(row.value, config);
+    valueByKey.set(key, (valueByKey.get(key) ?? 0) + row.aggregate);
   }
 
   const groupedValues = [...valueByKey]
     .map(([key, value]) => ({ key, label: getLookupLabel(key, config), value }))
-    .sort((a, b) => {
-      const byValue = b.value - a.value;
-      return byValue || a.label.localeCompare(b.label) || a.key.localeCompare(b.key);
-    });
+    .sort((a, b) => sortDimensionItems(a, b, config));
 
-  const chartType = groupedValues.length <= config.pieThreshold ? "pie" : "bar";
+  const chartType = getChartType(config, groupedValues.length);
   const totalCount = groupedValues.reduce((sum, item) => sum + item.value, 0);
   const visibleLimit = Math.max(1, config.maxVisibleItems);
   const allValues = groupedValues.map((item, index) =>
@@ -155,7 +154,7 @@ function toChartDatum(
 
 function getVisibleValues(
   allValues: ChartDatum[],
-  chartType: "bar" | "pie",
+  chartType: ChartType,
   totalCount: number,
   visibleLimit: number,
 ) {
@@ -185,14 +184,39 @@ function getLookupLabel(value: string, dimensionConfig: DimensionConfig) {
   const { lookup } = dimensionConfig;
 
   if (!lookup) {
-    return value;
+    return getFormattedLabel(value, dimensionConfig);
   }
 
   if (typeof lookup === "function") {
-    return lookup(value) ?? value;
+    return lookup(value) ?? getFormattedLabel(value, dimensionConfig);
   }
 
-  return lookup[value] ?? value;
+  return lookup[value] ?? getFormattedLabel(value, dimensionConfig);
+}
+
+function getFormattedLabel(value: string, dimensionConfig: DimensionConfig) {
+  if (dimensionConfig.labelFormat === "mm-yyyy") {
+    return formatMonthYearLabel(value);
+  }
+
+  return value;
+}
+
+function getChartType(config: DimensionConfig, valueCount: number): ChartType {
+  return config.chartType ?? (valueCount <= config.pieThreshold ? "pie" : "bar");
+}
+
+function sortDimensionItems(
+  a: { key: string; label: string; value: number },
+  b: { key: string; label: string; value: number },
+  config: DimensionConfig,
+) {
+  if (config.sort === "dateAsc" || config.aggregation === "month") {
+    return a.key.localeCompare(b.key) || a.label.localeCompare(b.label);
+  }
+
+  const byValue = b.value - a.value;
+  return byValue || a.label.localeCompare(b.label) || a.key.localeCompare(b.key);
 }
 
 function getDimensionValueLabel(dimensionMeasure: DimensionMeasure | undefined) {
@@ -211,4 +235,33 @@ function normalizeValue(value: unknown) {
   }
 
   return String(value);
+}
+
+function valueForDimensionAggregate(value: string, config: DimensionConfig) {
+  if (config.aggregation === "month") {
+    return toMonthKey(value);
+  }
+
+  return value;
+}
+
+function toMonthKey(value: unknown) {
+  const normalized = normalizeValue(value);
+  const match = normalized.match(/^(\d{4})-(\d{2})/);
+
+  if (match) {
+    return `${match[1]}-${match[2]}`;
+  }
+
+  return normalized;
+}
+
+function formatMonthYearLabel(value: string) {
+  const match = value.match(/^(\d{4})-(\d{2})$/);
+
+  if (!match) {
+    return value;
+  }
+
+  return `${match[2]}-${match[1]}`;
 }

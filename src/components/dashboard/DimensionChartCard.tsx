@@ -17,7 +17,7 @@ import {
 import { Maximize2 } from "lucide-react";
 import type { DimensionId, DimensionSummary } from "@/lib/dashboardTypes";
 import { wholeNumber } from "./formatters";
-import { BarDimension, PieDimension } from "./DimensionCharts";
+import { AreaDimension, BarDimension, PieDimension } from "./DimensionCharts";
 
 type DimensionChartCardProps = {
   summary: DimensionSummary;
@@ -26,9 +26,13 @@ type DimensionChartCardProps = {
   onToggle: (dimensionId: DimensionId, value: string) => void;
 };
 
-const chartTypeOptions: Array<{ label: string; value: DimensionSummary["chartType"] }> = [
+const standardChartTypeOptions: Array<{ label: string; value: DimensionSummary["chartType"] }> = [
   { label: "Bar", value: "bar" },
   { label: "Pie", value: "pie" },
+];
+
+const areaChartTypeOptions: Array<{ label: string; value: DimensionSummary["chartType"] }> = [
+  { label: "Area", value: "area" },
 ];
 
 export function DimensionChartCard({
@@ -38,6 +42,8 @@ export function DimensionChartCard({
   onToggle,
 }: DimensionChartCardProps) {
   const [chartType, setChartType] = useState<DimensionSummary["chartType"]>(summary.chartType);
+  const chartTypeOptions =
+    summary.chartType === "area" ? areaChartTypeOptions : standardChartTypeOptions;
 
   return (
     <Card component="article" withBorder shadow="xs" p="md" radius="md" mih={360}>
@@ -92,6 +98,12 @@ export function DimensionChartCard({
                 No {summary.valueLabel}
               </Text>
             </Center>
+          ) : chartType === "area" ? (
+            <AreaDimension
+              summary={summary}
+              canFilter={canFilter}
+              onToggle={onToggle}
+            />
           ) : chartType === "pie" ? (
             <PieDimension
               summary={summary}

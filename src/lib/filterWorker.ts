@@ -2,6 +2,7 @@ import crossfilter from "crossfilter2";
 import type {
   ActiveFilters,
   ChartDatum,
+  ChartType,
   DashboardMetrics,
   DashboardWorkerInMessage,
   DashboardWorkerOutMessage,
@@ -54,11 +55,38 @@ const normalizeValue = (value: unknown) => {
   return String(value);
 };
 
+const toMonthKey = (value: unknown) => {
+  const normalized = normalizeValue(value);
+  const match = normalized.match(/^(\d{4})-(\d{2})/);
+
+  if (match) {
+    return `${match[1]}-${match[2]}`;
+  }
+
+  return normalized;
+};
+
+const formatMonthYearLabel = (value: string) => {
+  const match = value.match(/^(\d{4})-(\d{2})$/);
+
+  if (!match) {
+    return value;
+  }
+
+  return `${match[2]}-${match[1]}`;
+};
+
 const valueForDimension = (
   row: DataRow,
   config: SerializableDashboardConfig["dimensions"][number],
 ) => {
-  return normalizeValue(row[config.field ?? config.id]);
+  const value = row[config.field ?? config.id];
+
+  if (config.aggregation === "month") {
+    return toMonthKey(value);
+  }
+
+  return normalizeValue(value);
 };
 
 const labelForDimensionValue = (
@@ -73,6 +101,10 @@ const labelForDimensionValue = (
 
   if (config.hasLookupFunction) {
     return value;
+  }
+
+  if (config.labelFormat === "mm-yyyy") {
+    return formatMonthYearLabel(value);
   }
 
   return getLookupMapLabel(value, config) ?? value;
@@ -383,18 +415,16 @@ const getInitialColorIndexByValue = (
   group: crossfilter.Group<DataRow, string, number>,
   config: SerializableDashboardConfig["dimensions"][number],
 ) => {
+  const items = group
+    .all()
+    .filter((item) => item.value > 0)
+    .map((item) => {
+      const key = String(item.key);
+      return { key, label: labelForDimensionValue(key, config), value: item.value };
+    });
   return new Map(
-    group
-      .all()
-      .filter((item) => item.value > 0)
-      .map((item) => {
-        const key = String(item.key);
-        return { key, label: labelForDimensionValue(key, config), value: item.value };
-      })
-      .sort((a, b) => {
-        const byValue = b.value - a.value;
-        return byValue || a.label.localeCompare(b.label) || a.key.localeCompare(b.key);
-      })
+    items
+      .sort((a, b) => sortDimensionItems(a, b, config))
       .map((item, index) => [item.key, index]),
   );
 };
@@ -479,7 +509,7 @@ const toChartDatum = (
 
 const getVisibleValues = (
   allValues: ChartDatum[],
-  chartType: "bar" | "pie",
+  chartType: ChartType,
   totalCount: number,
   visibleLimit: number,
 ) => {
@@ -504,6 +534,26 @@ const getVisibleValues = (
       aggregateCount: aggregatedValues.length,
     },
   ];
+};
+
+const getChartType = (
+  config: SerializableDashboardConfig["dimensions"][number],
+  groupedValues: Array<{ key: string }>,
+): ChartType => {
+  return config.chartType ?? (groupedValues.length <= config.pieThreshold ? "pie" : "bar");
+};
+
+const sortDimensionItems = (
+  a: { key: string; label: string; value: number },
+  b: { key: string; label: string; value: number },
+  config: SerializableDashboardConfig["dimensions"][number],
+) => {
+  if (config.sort === "dateAsc" || config.aggregation === "month") {
+    return a.key.localeCompare(b.key) || a.label.localeCompare(b.label);
+  }
+
+  const byValue = b.value - a.value;
+  return byValue || a.label.localeCompare(b.label) || a.key.localeCompare(b.key);
 };
 
 const getSummaries = (): DimensionSummary[] => {
@@ -532,13 +582,10 @@ const getSummaries = (): DimensionSummary[] => {
       .map((item) => {
         const key = String(item.key);
         return { key, label: labelForDimensionValue(key, config), value: item.value };
-      })
-      .sort((a, b) => {
-        const byValue = b.value - a.value;
-        return byValue || a.label.localeCompare(b.label) || a.key.localeCompare(b.key);
-      });
+    });
 
-    const chartType = groupedValues.length <= config.pieThreshold ? "pie" : "bar";
+    const chartType = getChartType(config, groupedValues);
+    groupedValues.sort((a, b) => sortDimensionItems(a, b, config));
     const totalCount = groupedValues.reduce((sum, item) => sum + item.value, 0);
     const allValues = groupedValues.map((item) =>
       toChartDatum(item, totalCount, selected, config, handle.colorIndexByValue),

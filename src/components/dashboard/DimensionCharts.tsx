@@ -1,4 +1,6 @@
 import {
+  Area,
+  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
@@ -196,4 +198,112 @@ export function BarDimension({
       </BarChart>
     </ResponsiveContainer>
   );
+}
+
+export function AreaDimension({
+  canFilter = true,
+  summary,
+  onToggle,
+}: Omit<DimensionChartProps, "onShowAll">) {
+  const areaValues = [...summary.values].sort(compareDateChartValues);
+  const hasActiveSelection = hasSelection(areaValues);
+
+  const handleChartClick = (entry: unknown) => {
+    if (!canFilter) {
+      return;
+    }
+
+    const datum = getAreaDatum(entry);
+
+    if (datum) {
+      onToggle(summary.id, datum.key);
+    }
+  };
+
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <AreaChart
+        data={areaValues}
+        margin={{ top: 14, right: 18, bottom: 8, left: 8 }}
+        onClick={handleChartClick}
+      >
+        <defs>
+          <linearGradient id={`${summary.id}-area-fill`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#2563eb" stopOpacity={0.34} />
+            <stop offset="95%" stopColor="#2563eb" stopOpacity={0.04} />
+          </linearGradient>
+        </defs>
+        <CartesianGrid vertical={false} stroke="#e5e7eb" />
+        <XAxis
+          dataKey="label"
+          reversed={false}
+          tickLine={false}
+          axisLine={false}
+          minTickGap={18}
+          tick={{ fill: "#4b5563", fontSize: 11 }}
+        />
+        <YAxis
+          width={52}
+          tickLine={false}
+          axisLine={false}
+          tick={{ fill: "#4b5563", fontSize: 11 }}
+        />
+        <Tooltip
+          content={<ChartTooltip valueLabel={summary.valueLabel} />}
+          isAnimationActive={false}
+        />
+        <Area
+          type="monotone"
+          dataKey="value"
+          stroke="#2563eb"
+          strokeWidth={2}
+          fill={`url(#${summary.id}-area-fill)`}
+          fillOpacity={hasActiveSelection ? 0.5 : 1}
+          dot={{
+            fill: "#fff",
+            r: 2.5,
+            stroke: "#2563eb",
+            strokeWidth: 1.5,
+          }}
+          activeDot={{
+            fill: "#111827",
+            r: 5,
+            stroke: "#fff",
+            strokeWidth: 2,
+          }}
+          isAnimationActive={false}
+        />
+      </AreaChart>
+    </ResponsiveContainer>
+  );
+}
+
+function compareDateChartValues(a: ChartDatum, b: ChartDatum) {
+  return dateSortValue(a.key, a.label).localeCompare(dateSortValue(b.key, b.label));
+}
+
+function dateSortValue(key: string, label: string) {
+  const yearMonthKey = key.match(/^(\d{4})-(\d{2})/);
+
+  if (yearMonthKey) {
+    return `${yearMonthKey[1]}-${yearMonthKey[2]}`;
+  }
+
+  const monthYearLabel = label.match(/^(\d{2})-(\d{4})$/);
+
+  if (monthYearLabel) {
+    return `${monthYearLabel[2]}-${monthYearLabel[1]}`;
+  }
+
+  return key;
+}
+
+function getAreaDatum(entry: unknown) {
+  if (!entry || typeof entry !== "object" || !("activePayload" in entry)) {
+    return null;
+  }
+
+  const payload = (entry as { activePayload?: Array<{ payload?: Partial<ChartDatum> }> })
+    .activePayload?.[0]?.payload;
+  return typeof payload?.key === "string" ? (payload as ChartDatum) : null;
 }
