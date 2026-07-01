@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Box, SimpleGrid, Stack } from "@mantine/core";
 import { ActiveFiltersBar } from "@/components/dashboard/ActiveFiltersBar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
+import { DetailModal } from "@/components/dashboard/DetailModal";
 import { DimensionChartCard } from "@/components/dashboard/DimensionChartCard";
 import { ErrorState, LoadingState } from "@/components/dashboard/StatusStates";
 import { FullOptionsModal } from "@/components/dashboard/FullOptionsModal";
@@ -37,6 +38,7 @@ export function CrossfilterDashboard({
   );
   const { initialState, initialStateError } = useInitialDashboardState(initialStateUrl, config);
   const [expandedDimensionId, setExpandedDimensionId] = useState<DimensionId | null>(null);
+  const [detailModalOpen, setDetailModalOpen] = useState(false);
   const displayState = dashboardState ?? initialState;
   const canFilter = Boolean(dashboardState) && status === "ready";
 
@@ -52,6 +54,10 @@ export function CrossfilterDashboard({
   }, []);
 
   const filterCount = selectedCount(displayState?.activeFilters ?? {});
+  const filteredTotal =
+    displayState?.metrics.values.find((metric) => metric.id === "totalFiltered")?.value ??
+    displayState?.metrics.filteredRows ??
+    null;
 
   const filterEntries = useMemo(() => {
     const active = displayState?.activeFilters ?? {};
@@ -107,11 +113,13 @@ export function CrossfilterDashboard({
           status={status}
           progress={progress}
           filterCount={filterCount}
+          filteredTotal={filteredTotal}
           onClearFilters={() => {
             if (canFilter) {
               send({ type: "clearAllFilters" });
             }
           }}
+          onViewDetail={() => setDetailModalOpen(true)}
         />
 
         {status === "error" ? (
@@ -169,6 +177,11 @@ export function CrossfilterDashboard({
                 }}
               />
             ) : null}
+            <DetailModal
+              dimensions={config.dimensions}
+              opened={detailModalOpen}
+              onClose={() => setDetailModalOpen(false)}
+            />
           </>
         ) : null}
       </Stack>

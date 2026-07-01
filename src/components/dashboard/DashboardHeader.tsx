@@ -1,22 +1,31 @@
-import { Button, Group, Stack, Text, ThemeIcon, Title } from "@mantine/core";
-import { Database, RotateCcw } from "lucide-react";
+import { Button, Group, Stack, Text, ThemeIcon, Title, Tooltip } from "@mantine/core";
+import { Database, Download, RotateCcw, Table } from "lucide-react";
 import type { WorkerLoadProgress } from "@/lib/dashboardTypes";
 import type { LoadStatus } from "./formatters";
 import { StatusBadge } from "./StatusStates";
+
+const DOWNLOAD_LIMIT = 200_000;
 
 type DashboardHeaderProps = {
   status: LoadStatus;
   progress: WorkerLoadProgress;
   filterCount: number;
+  filteredTotal: number | null;
   onClearFilters: () => void;
+  onViewDetail: () => void;
 };
 
 export function DashboardHeader({
   status,
   progress,
   filterCount,
+  filteredTotal,
   onClearFilters,
+  onViewDetail,
 }: DashboardHeaderProps) {
+  const canDownload =
+    status === "ready" && filteredTotal !== null && filteredTotal <= DOWNLOAD_LIMIT;
+
   return (
     <Group
       component="header"
@@ -41,6 +50,34 @@ export function DashboardHeader({
       </Stack>
       <Group gap="xs">
         <StatusBadge status={status} progress={progress} />
+        <Tooltip
+          label="Reduce the selection to a manageable size of 200,000 items or fewer."
+          disabled={canDownload}
+          openDelay={250}
+          withArrow
+        >
+          <span>
+            <Button
+              variant="default"
+              size="sm"
+              leftSection={<Download size={16} aria-hidden="true" />}
+              disabled={!canDownload}
+              title="Download"
+            >
+              Download
+            </Button>
+          </span>
+        </Tooltip>
+        <Button
+          variant="default"
+          size="sm"
+          leftSection={<Table size={16} aria-hidden="true" />}
+          onClick={onViewDetail}
+          disabled={status !== "ready"}
+          title="View detail"
+        >
+          View Detail
+        </Button>
         <Button
           variant="default"
           size="sm"
